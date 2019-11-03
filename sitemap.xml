@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>http://example.org/post/my-first-post/</loc>
+    <lastmod>2019-11-03T23:54:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://example.org/categories/</loc>
   </url>
   

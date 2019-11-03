@@ -132,6 +132,28 @@
         </div>
         
      
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/post/my-first-post/" >五分钟搭建个人博客 hugo&#43;github</a>
+        </span>
+        <span class="item__date">
+          Nov 03, 2019
+        </span>
+        <span >
+        
+        1.安装hugo  浏览 Hugo 官方的安装指南,浏览了解基础就可以了，可跳过； mac系统建议安装Homebrew，已安装可以跳过； 打开终端，建议下载一个iterm2；
+brew install hugo hugo version   2.新建一个网站项目（文件夹）  cd ~/Blog mkdir wenbin-blog cd wenbin-blog hugo new site wenbin-blog   3.克隆下载themes并设置  cd ~/Blog/wenbin-blog mkdir themes cd themes git clone https://github.com/htr3n/hyde-hyde.git hyde-hyde vim ~/Blog/wenbin-blog/config.toml #配置theme = &quot;tranquilpeak&quot;   4.新建一篇文章  cd ~/Blog/wenbin-blog hugo new post/my-first-post.md   5.预览并构建网站  hugo server -D #http://localhost:1313 preview hugo #hugo会将构建的网站内容默认保存wenbin-blog/public/ 文件夹中   6.使用github Pages  创建github账号 https://pages.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/post/my-first-post/">➦</a>
+        
+        </div>
+        
+     
   </div>
   
 
