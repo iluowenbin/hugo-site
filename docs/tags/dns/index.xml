@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dns on sakura&#39;s space</title>
-    <link>/tags/dns/</link>
-    <description>Recent content in dns on sakura&#39;s space</description>
+    <title>dns on Sakura&#39;s space</title>
+    <link>http://localhost:1313/tags/dns/</link>
+    <description>Recent content in dns on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Mon, 04 Nov 2019 16:24:14 +0800</lastBuildDate>
-    <atom:link href="/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://localhost:1313/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
-      <title>hugo博客进阶(1)</title>
-      <link>/post/2019-11-04-1/</link>
+      <title>Hugo博客进阶(1)</title>
+      <link>http://localhost:1313/post/2019-11-04-1/</link>
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
-      <guid>/post/2019-11-04-1/</guid>
-      <description>
-
-&lt;h4 id=&#34;hello&#34;&gt;hello&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home
-mkdir test
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      
+      <guid>http://localhost:1313/post/2019-11-04-1/</guid>
+      <description>github Pages配置个人域名，dns解析配置</description>
     </item>
     
   </channel>

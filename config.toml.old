@@ -1,0 +1,44 @@
+languageCode = "zh-cn"
+title = "sakura's space"
+theme = "hugo-theme-zen"
+hasCJKLanguage = true
+
+paginate = 12
+enableEmoji = true
+enableRobotsTXT = true
+enableGitInfo = true
+googleAnalytics = ""
+preserveTaxonomyNames = true
+
+[Permalinks]
+    posts = "/:year/:filename/"
+
+[params]
+    description =  "sakura的个人技术博客网站，主要关注web服务,大数据开发,微服务,公众号开发等技术"
+    contact = "info@example.org"
+    dateformat = ""
+    icon = ""
+    image = ""
+    imageMaxWidth = ""
+    since = 2019
+    author = "wenbin"
+    avatar = ""
+    subtitle = "Just do it"
+    cdn_url = ""
+    home_mode = ""
+    enableGitalk = true
+    google_verification = ""
+    keywords = ""
+    beian = ""
+    baiduAnalytics = ""
+
+[params.social]
+    GitHub = "xxoo"
+    Twitter = "xxoo"
+    Email   = "xxoo"
+    Instagram = "xxoo"
+    Wechat = "ccc"
+    Facebook = "xxoo"
+    Telegram = "xxoo"
+    Dribbble = "xxoo"
+    Medium = "xxoo"

@@ -1,117 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>blog on sakura&#39;s space</title>
-    <link>/categories/blog/</link>
-    <description>Recent content in blog on sakura&#39;s space</description>
+    <title>blog on Sakura&#39;s space</title>
+    <link>http://localhost:1313/categories/blog/</link>
+    <description>Recent content in blog on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 04 Nov 2019 16:24:14 +0800</lastBuildDate>
-    <atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Mon, 04 Nov 2019 20:03:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
-      <title>hugo博客进阶(1)</title>
-      <link>/post/2019-11-04-1/</link>
-      <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
-      <guid>/post/2019-11-04-1/</guid>
-      <description>
-
-&lt;h4 id=&#34;hello&#34;&gt;hello&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home
-mkdir test
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <title>Hugo博客进阶(2)</title>
+      <link>http://localhost:1313/post/2019-11-04-2/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/2019-11-04-2/</guid>
+      <description>给自己的博客加上tag和分类</description>
     </item>
     
     <item>
-      <title>快速利用hugo搭建个人博客</title>
-      <link>/post/2019-11-03-1/</link>
+      <title>Hugo博客进阶(1)</title>
+      <link>http://localhost:1313/post/2019-11-04-1/</link>
+      <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/2019-11-04-1/</guid>
+      <description>github Pages配置个人域名，dns解析配置</description>
+    </item>
+    
+    <item>
+      <title>快速利用Hugo搭建个人博客</title>
+      <link>http://localhost:1313/post/2019-11-03-1/</link>
       <pubDate>Sun, 03 Nov 2019 23:54:09 +0800</pubDate>
-      <guid>/post/2019-11-03-1/</guid>
-      <description>
-
-&lt;h4 id=&#34;1-安装hugo&#34;&gt;1.安装hugo&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;浏览 Hugo 官方的安装指南,浏览了解基础就可以了，可跳过；&lt;/li&gt;
-&lt;li&gt;mac系统建议安装Homebrew，已安装可以跳过；&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;打开终端，建议下载一个iterm2；&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install hugo
-hugo version
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;2-新建一个网站项目-文件夹&#34;&gt;2.新建一个网站项目（文件夹）&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ~/Blog
-mkdir wenbin-blog
-cd wenbin-blog
-hugo new site wenbin-blog
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;3-克隆下载themes并设置&#34;&gt;3.克隆下载themes并设置&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ~/Blog/wenbin-blog
-mkdir themes
-cd themes
-git clone https://github.com/htr3n/hyde-hyde.git hyde-hyde
-vim ~/Blog/wenbin-blog/config.toml  
-#配置theme = &amp;quot;tranquilpeak&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;4-新建一篇文章&#34;&gt;4.新建一篇文章&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ~/Blog/wenbin-blog
-hugo new post/my-first-post.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;5-预览并构建网站&#34;&gt;5.预览并构建网站&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;hugo server -D
-#http://localhost:1313 preview
-hugo
-#hugo会将构建的网站内容默认保存wenbin-blog/public/ 文件夹中
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;6-使用github-pages&#34;&gt;6.使用github Pages&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;创建github账号 &lt;a href=&#34;https://pages.github.com&#34;&gt;https://pages.github.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;新建一个代码仓库repository，库名为 username.&lt;a href=&#34;http://github.io&#34;&gt;http://github.io&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;将public文件夹关联到github仓库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd ~/Blog/wenbin-blog/public
-git init #
-ls -a
-git remote add origin git remote add origin git@github.com:iluowenbin/iluowenbin.github.io.git
-cat .git/config
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;7-提交静态网站代码到github&#34;&gt;7.提交静态网站代码到github&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git status
-git add .
-git commit -m &amp;quot;Init my blog&amp;quot;
-git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;点击 &lt;a href=&#34;https://username.github.io&#34;&gt;https://username.github.io&lt;/a&gt;&lt;/p&gt;
-</description>
+      
+      <guid>http://localhost:1313/post/2019-11-03-1/</guid>
+      <description>从零开始使用Hugo和github Pages搭建静态博客</description>
     </item>
     
   </channel>
