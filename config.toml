@@ -1,7 +1,6 @@
-baseURL = "http://example.org/"
 languageCode = "zh-cn"
 title = "sakura's space"
-theme = "LeaveIt"
+theme = "angels-ladder"
 hasCJKLanguage = true
 
 paginate = 11
