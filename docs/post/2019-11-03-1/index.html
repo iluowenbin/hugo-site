@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-03T23:54:09&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-03T23:54:09&#43;08:00" />
-<meta itemprop="wordCount" content="361">
+<meta itemprop="wordCount" content="752">
 
 
 
@@ -140,15 +140,15 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#前言">前言</a>
 <ul>
 <li><a href="#1-安装hugo">1.安装hugo</a></li>
-<li><a href="#2-新建一个网站项目-文件夹">2.新建一个网站项目（文件夹）</a></li>
-<li><a href="#3-克隆下载themes并设置">3.克隆下载themes并设置</a></li>
+<li><a href="#2-新建一个网站项目">2.新建一个网站项目</a></li>
+<li><a href="#3-下载themes并设置">3.下载themes并设置</a></li>
 <li><a href="#4-新建一篇文章">4.新建一篇文章</a></li>
 <li><a href="#5-预览并构建网站">5.预览并构建网站</a></li>
-<li><a href="#6-使用github-pages">6.使用github Pages</a></li>
-<li><a href="#7-提交静态网站代码到github">7.提交静态网站代码到github</a></li>
+<li><a href="#6-添加github仓库">6.添加github仓库</a></li>
+<li><a href="#7-配置github-pages">7.配置github Pages</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -159,13 +159,16 @@
     <div class="post-content">
       
 
+<h3 id="前言">前言</h3>
+
+<p>踩了一天的坑总算是把博客给搭了起来，看完了各类快速搭建教程，但每篇总是会少了点东西，本文力争成为全网最舒服的Hugo博客搭建姿势。</p>
+
 <h4 id="1-安装hugo">1.安装hugo</h4>
 
 <ul>
-<li>浏览 Hugo 官方的安装指南,浏览了解基础就可以了，可跳过；</li>
-<li>mac系统建议安装Homebrew，已安装可以跳过；</li>
+<li>浏览 Hugo 官方的安装指南，浏览了解基础就可以了，可跳过；</li>
 
-<li><p>打开终端，建议下载一个iterm2；</p>
+<li><p>mac系统建议安装Homebrew，已安装可以跳过，打开终端；</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
@@ -176,24 +179,30 @@
 hugo version</code></pre></td></tr></table>
 </div>
 </div></li>
+
+<li><p>如果是windows系统，则到此处下载Hugo</p></li>
 </ul>
 
-<h4 id="2-新建一个网站项目-文件夹">2.新建一个网站项目（文件夹）</h4>
+<h4 id="2-新建一个网站项目">2.新建一个网站项目</h4>
+
+<ul>
+<li><p>创建网站根目录，后续主要命令都在此目录下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog
-mkdir wenbin-blog
-<span class="nb">cd</span> wenbin-blog
 hugo new site wenbin-blog</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="3-克隆下载themes并设置">3.克隆下载themes并设置</h4>
+</div></li>
+</ul>
+
+<h4 id="3-下载themes并设置">3.下载themes并设置</h4>
+
+<ul>
+<li><p>推荐even主题，直接套用config框架，酥胡～</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
@@ -201,18 +210,23 @@ hugo new site wenbin-blog</code></pre></td></tr></table>
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/wenbin-blog
 mkdir themes
-<span class="nb">cd</span> themes
-git clone https://github.com/htr3n/hyde-hyde.git hyde-hyde
-vim ~/Blog/wenbin-blog/config.toml  
-<span class="c1">#配置theme = &#34;hyde-hyde&#34;</span></code></pre></td></tr></table>
+git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+rm config.toml
+cp themes/even/exampleSite/config.toml . <span class="c1"># 直接替换config文件，后续可以慢慢修改配置</span></code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
+
 <h4 id="4-新建一篇文章">4.新建一篇文章</h4>
+
+<ul>
+<li>new命令会直接在content目录下创建md文件，并设置好默认的head</li>
+
+<li><p>部分主题是posts，部分是post，如果这里错误可能会导致网站首页没有文章目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
@@ -222,48 +236,46 @@ vim ~/Blog/wenbin-blog/config.toml
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/wenbin-blog
 hugo new post/my-first-post.md</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
+
 <h4 id="5-预览并构建网站">5.预览并构建网站</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">hugo server -D
-<span class="c1">#http://localhost:1313 preview</span>
-hugo
-<span class="c1">#hugo会将构建的网站内容默认保存wenbin-blog/public/ 文件夹中</span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="6-使用github-pages">6.使用github Pages</h4>
 
 <ul>
-<li>创建github账号 <a href="https://pages.github.com">https://pages.github.com</a></li>
-<li>新建一个代码仓库repository，库名为 username.<a href="http://github.io">http://github.io</a></li>
+<li>预览推荐指定目录到dev文件夹，方便区分开发布文件夹</li>
+<li>-D参数表示草稿md也会展示出来，默认不展示草稿文件（是否草稿文件由md文件里的draft头确定）</li>
+<li>-t参数可以指定theme</li>
 
-<li><p>将public文件夹关联到github仓库</p>
+<li><p><a href="http://localhost:1313">http://localhost:1313</a> preview</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/wenbin-blog/public
-git init #
-ls -a
-git remote add origin git remote add origin git@github.com:iluowenbin/iluowenbin.github.io.git
-cat .git/config</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-sh" data-lang="sh">hugo server -D -d dev</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>构建网站推荐指定到docs目录，方便后续发布到github Pages</p></li>
+
+<li><p>构建完后会在/docs中看到my-first-post文件夹</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">hugo -d docs</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
 
-<h4 id="7-提交静态网站代码到github">7.提交静态网站代码到github</h4>
+<h4 id="6-添加github仓库">6.添加github仓库</h4>
+
+<ul>
+<li>创建github账号 <a href="https://pages.github.com">https://pages.github.com</a></li>
+<li>新建一个代码仓库repository，库名为 username.site</li>
+
+<li><p>初始化git仓库，cat后可以看到分支和远端信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
@@ -272,13 +284,48 @@ cat .git/config</code></pre></td></tr></table>
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git status
-git add .
-git commit -m <span class="s2">&#34;Init my blog&#34;</span>
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/wenbin-blog
+git init
+git remote add origin git remote add origin git@github.com:iluowenbin/iluowenbin.site.git
+cat .git/config</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>修改.gitignore文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">/dev
+/themes</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>提交并推送github</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">git add .
+git commit -m &#34;init site&#34;
 git push -u origin master</code></pre></td></tr></table>
 </div>
-</div>
-<p>点击 <a href="https://username.github.io">https://username.github.io</a></p>
+</div></li>
+</ul>
+
+<h4 id="7-配置github-pages">7.配置github Pages</h4>
+
+<ul>
+<li>打开username.site的setting，下滑找到github Pages配置</li>
+<li>将Source配置为master branch/docs folder</li>
+</ul>
+
+<p>点击 <a href="https://username.github.io">https://username.github.io</a> 大功告成</p>
 
     </div>
 
