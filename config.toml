@@ -1,0 +1,40 @@
+baseURL = "http://example.org/"
+languageCode = "zh-cn"
+title = "sakura's space"
+theme = "crab"
+hasCJKLanguage = true
+
+paginate = 11
+enableEmoji = true
+enableRobotsTXT = true
+enableGitInfo = true
+googleAnalytics = ""
+preserveTaxonomyNames = true
+
+[Permalinks]
+    posts = "/:year/:filename/"
+
+[params]
+    since = 2019
+    author = "wenbin"
+    avatar = ""
+    subtitle = "Just do it"
+    cdn_url = ""
+    home_mode = ""
+    enableGitalk = true
+    google_verification = ""
+    description = ""
+    keywords = ""
+    beian = ""
+    baiduAnalytics = ""
+
+[params.social]
+    GitHub = "xxoo"
+    Twitter = "xxoo"
+    Email   = "xxoo"
+    Instagram = "xxoo"
+    Wechat = "ccc"
+    Facebook = "xxoo"
+    Telegram = "xxoo"
+    Dribbble = "xxoo"
+    Medium = "xxoo"
