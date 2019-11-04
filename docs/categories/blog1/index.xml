@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>“blog1” on sakura&#39;s space</title>
+    <link>/categories/blog1/</link>
+    <description>Recent content in “blog1” on sakura&#39;s space</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Nov 2019 20:03:20 +0800</lastBuildDate>
+    <atom:link href="/categories/blog1/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hugo博客进阶(2)</title>
+      <link>/post/2019-11-04-2/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      <guid>/post/2019-11-04-2/</guid>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tags
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

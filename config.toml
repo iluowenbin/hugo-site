@@ -1,9 +1,9 @@
 languageCode = "zh-cn"
 title = "sakura's space"
-theme = "angels-ladder"
+theme = "hugo-theme-zen"
 hasCJKLanguage = true
 
-paginate = 11
+paginate = 12
 enableEmoji = true
 enableRobotsTXT = true
 enableGitInfo = true
@@ -14,6 +14,12 @@ preserveTaxonomyNames = true
     posts = "/:year/:filename/"
 
 [params]
+    description =  "sakura的个人技术博客网站，主要关注web服务,大数据开发,微服务,公众号开发等技术"
+    contact = "info@example.org"
+    dateformat = ""
+    icon = ""
+    image = ""
+    imageMaxWidth = ""
     since = 2019
     author = "wenbin"
     avatar = ""
@@ -22,7 +28,6 @@ preserveTaxonomyNames = true
     home_mode = ""
     enableGitalk = true
     google_verification = ""
-    description = ""
     keywords = ""
     beian = ""
     baiduAnalytics = ""

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>快速利用hugo搭建个人博客 – sakura&#39;s space</title>
+<meta name="description" content="从零开始使用Hugo和github Pages搭建静态博客">
+<meta name="created" content="2019-11-03T23:54:09&#43;0800">
+<meta name="modified" content="2019-11-03T23:54:09&#43;0800">
+<meta name="author" content="wenbin">
+<meta name="contact" content="info@example.org">
+<meta property="og:site_name" content="sakura&#39;s space">
+<meta property="og:title" content="快速利用hugo搭建个人博客">
+<meta property="og:url" content="/post/2019-11-03-1/">
+<meta property="og:type" content="article">
+
+<meta name="generator" content="Hugo 0.58.3" />
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+
+<link rel="canonical" href="/post/2019-11-03-1/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/css/styles.815d832c412376a2dcbec755e26a23c857bfc9df27f5000cebf4428684f1bdb5.css">
+<link rel="stylesheet" href="/css/print.27fc184f8670f41a2690985390779e7b20335a8fadff8fa015cf9417ffe50c36.css" media="print">
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "快速利用hugo搭建个人博客",
+    "datePublished": "2019-11-03T23:54:09+08:00",
+    "dateModified": "2019-11-03T23:54:09+08:00",
+    "url" : "/post/2019-11-03-1/",
+    "description": "从零开始使用Hugo和github Pages搭建静态博客",
+    "keywords": ["hugo","github Pages"],
+    "author": {
+      "@type": "Person",
+      "name": "wenbin"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": ""
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "sakura's space",
+      "url": ""
+    }
+  }
+</script>
+
+<script defer src="/js/umbrella.min.b426107371d121c9a56a27aac9e9058ff592a021e2f4c3c94827fe70920d3cbb.js"></script>
+<script defer src="/js/script.min.8e4d91ebe0d9226621e408b7205bd7b009e4935608e4b29c4275116490cc836d.js"></script>
+
+
+</head>
+
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>sakura&#39;s space</span></a>
+</h1>
+<div class="region header__region">
+</div>
+</header>
+
+<nav class="main-menu layout__navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="active" href="/post/">Posts</a></li>
+</ul>
+</nav>
+
+
+<main class="main layout__main">
+<article class="section-post single-view">
+<header>
+<h1 class="title ">快速利用hugo搭建个人博客</h1>
+<div class="tags">
+Tags:
+<ul>
+<li><a href="/tags/hugo">hugo</a></li>
+<li><a href="/tags/github-pages">github Pages</a></li>
+</ul>
+</div>
+</header>
+<div class="content">
+
+
+<h4 id="1-安装hugo">1.安装hugo</h4>
+
+<ul>
+<li>浏览 Hugo 官方的安装指南,浏览了解基础就可以了，可跳过；</li>
+<li>mac系统建议安装Homebrew，已安装可以跳过；</li>
+
+<li><p>打开终端，建议下载一个iterm2；</p>
+
+<pre><code class="language-sh">brew install hugo
+hugo version
+</code></pre></li>
+</ul>
+
+<h4 id="2-新建一个网站项目-文件夹">2.新建一个网站项目（文件夹）</h4>
+
+<ul>
+<li><pre><code class="language-sh">cd ~/Blog
+mkdir wenbin-blog
+cd wenbin-blog
+hugo new site wenbin-blog
+</code></pre></li>
+</ul>
+
+<h4 id="3-克隆下载themes并设置">3.克隆下载themes并设置</h4>
+
+<ul>
+<li><pre><code class="language-sh">cd ~/Blog/wenbin-blog
+mkdir themes
+cd themes
+git clone https://github.com/htr3n/hyde-hyde.git hyde-hyde
+vim ~/Blog/wenbin-blog/config.toml  
+#配置theme = &quot;tranquilpeak&quot;
+</code></pre></li>
+</ul>
+
+<h4 id="4-新建一篇文章">4.新建一篇文章</h4>
+
+<ul>
+<li><pre><code class="language-sh">cd ~/Blog/wenbin-blog
+hugo new post/my-first-post.md
+</code></pre></li>
+</ul>
+
+<h4 id="5-预览并构建网站">5.预览并构建网站</h4>
+
+<ul>
+<li><pre><code class="language-sh">hugo server -D
+#http://localhost:1313 preview
+hugo
+#hugo会将构建的网站内容默认保存wenbin-blog/public/ 文件夹中
+</code></pre></li>
+</ul>
+
+<h4 id="6-使用github-pages">6.使用github Pages</h4>
+
+<ul>
+<li>创建github账号 <a href="https://pages.github.com">https://pages.github.com</a></li>
+<li>新建一个代码仓库repository，库名为 username.<a href="http://github.io">http://github.io</a></li>
+
+<li><p>将public文件夹关联到github仓库</p>
+
+<pre><code class="language-sh">cd ~/Blog/wenbin-blog/public
+git init #
+ls -a
+git remote add origin git remote add origin git@github.com:iluowenbin/iluowenbin.github.io.git
+cat .git/config
+</code></pre></li>
+</ul>
+
+<h4 id="7-提交静态网站代码到github">7.提交静态网站代码到github</h4>
+
+<ul>
+<li><pre><code class="language-sh">git status
+git add .
+git commit -m &quot;Init my blog&quot;
+git push -u origin master
+</code></pre></li>
+</ul>
+
+<p>点击 <a href="https://username.github.io">https://username.github.io</a></p>
+
+
+</div>
+</article>
+</main>
+
+
+<aside class="sidebar layout__second-sidebar">
+<section>
+<h4 class="menu"><a class="active" href="/post/">Posts</a></h4>
+<ul class="menu">
+<li><a class="" href="/post/2019-11-04-2/">hugo博客进阶(2)</a></li>
+<li><a class="" href="/post/2019-11-04-1/">hugo博客进阶(1)</a></li>
+<li><a class="active" href="/post/2019-11-03-1/">快速利用hugo搭建个人博客</a></li>
+</ul>
+</section>
+</aside>
+<footer class="footer layout__footer">
+<p><span>© sakura&#39;s space</span></p>
+
+
+</footer>
+
+</div>
+</body>
+</html>

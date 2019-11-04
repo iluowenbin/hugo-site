@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on sakura&#39;s space</title>
@@ -6,9 +6,48 @@
     <description>Recent content in Tags on sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Nov 2019 20:03:20 +0800</lastBuildDate>
+    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>github Pages</title>
+      <link>/tags/github-pages/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      <guid>/tags/github-pages/</guid>
+      <description></description>
+    </item>
     
+    <item>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      <guid>/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tags</title>
+      <link>/tags/tags/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      <guid>/tags/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dns</title>
+      <link>/tags/dns/</link>
+      <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
+      <guid>/tags/dns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>domain</title>
+      <link>/tags/domain/</link>
+      <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
+      <guid>/tags/domain/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
