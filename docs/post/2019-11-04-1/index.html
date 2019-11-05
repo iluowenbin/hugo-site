@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-04T16:24:14&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-04T23:04:56&#43;08:00" />
-<meta itemprop="wordCount" content="7">
+<meta itemprop="wordCount" content="630">
 
 
 
@@ -127,8 +127,8 @@
         <div class="post-category">
             <a href="/categories/blog/"> blog </a>
             </div>
-          <span class="more-meta"> 7 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 630 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -142,9 +142,13 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#前言">前言</a>
 <ul>
-<li><a href="#hello">hello</a></li>
+<li><a href="#1-前提">1.前提</a></li>
+<li><a href="#2-购买域名">2.购买域名</a></li>
+<li><a href="#3-配置个人域名到githubpages">3.配置个人域名到githubPages</a></li>
+<li><a href="#4-添加dns解析">4.添加DNS解析</a></li>
+<li><a href="#5-打开个人域名">5.打开个人域名</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -155,17 +159,65 @@
     <div class="post-content">
       
 
-<h4 id="hello">hello</h4>
+<h3 id="前言">前言</h3>
+
+<p>本文介绍了如何将自己的静态网站托管到github后，在阿里云上购买个人域名并利用免费的DNS服务在github Pages上以https协议加载个人域名。</p>
+
+<h4 id="1-前提">1.前提</h4>
+
+<ul>
+<li>保证访问<a href="https://username.github.io">https://username.github.io</a> 能够正确访问你的网站</li>
+<li>如果你还没有试过使用Hugo+github Pages搭建博客，欢迎查看我的上一篇教程<a href="https://luowenbin.site/post/2019-11-03-1/">https://luowenbin.site/post/2019-11-03-1/</a></li>
+</ul>
+
+<h4 id="2-购买域名">2.购买域名</h4>
+
+<ul>
+<li>前往<a href="https://account.aliyun.com/">https://account.aliyun.com/</a> 挑选域名，推荐暂时购买1年，后续网站稳定了再购买5年或者10年</li>
+<li>域名最好买可以备案的域名，后续可以省很多事</li>
+<li>购买域名前需要验证邮箱，实名认证，阿里十分迅速，大约5分钟可以搞掂</li>
+</ul>
+
+<h4 id="3-配置个人域名到githubpages">3.配置个人域名到githubPages</h4>
+
+<ul>
+<li><p>添加CNAME文件到/static目录，以后构建时就会自动生成一份到/docs，文件内容即为domain</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell script" data-lang="shell script">cd /home
-mkdir test</code></pre></td></tr></table>
+<pre class="chroma">username.site</pre></td></tr></table>
 </div>
-</div>
+</div></li>
+
+<li><p>构建hugo并提交</p></li>
+
+<li><p>到settting页面检查是否自动加载了domain
+<img src="https://i.loli.net/2019/11/05/j6bNMmzq5Rsa2LK.png" alt="image.png" /></p></li>
+
+<li><p>如果失败，检查一下/docs目录下是否有CNAME文件</p></li>
+</ul>
+
+<h4 id="4-添加dns解析">4.添加DNS解析</h4>
+
+<ul>
+<li>重复ping一下你的username.github.io，得到2个以上ip</li>
+<li>到域名控制台进入解析设置，添加3个记录
+<img src="https://i.loli.net/2019/11/05/luByswWTp1L2afo.png" alt="image.png" /></li>
+<li>1-2分钟后查看githubPages配置，已经被解析成功
+<img src="https://i.loli.net/2019/11/05/TGBHhUOplPv7mW6.png" alt="image.png" /></li>
+<li>开启https
+<img src="https://i.loli.net/2019/11/05/enWzcgyE9x18aOR.png" alt="image.png" /></li>
+<li>如果提示失败，请检查下域名是否正常状态；添加的记录ip是否正确</li>
+</ul>
+
+<h4 id="5-打开个人域名">5.打开个人域名</h4>
+
+<ul>
+<li>点击<a href="https://luowenbin.site/">https://luowenbin.site/</a> 访问成功</li>
+</ul>
+
     </div>
 
     <div class="post-copyright">

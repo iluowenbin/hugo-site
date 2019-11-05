@@ -2,29 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:1313/post/2019-11-05-1/</loc>
+    <lastmod>2019-11-05T11:25:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2019-11-05T11:25:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2019-11-05T11:25:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/categories/blog/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/github-pages/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -37,22 +58,8 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -87,7 +94,7 @@
   
   <url>
     <loc>http://localhost:1313/post/2019-11-03-1/</loc>
-    <lastmod>2019-11-05T00:44:15+08:00</lastmod>
+    <lastmod>2019-11-05T10:30:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

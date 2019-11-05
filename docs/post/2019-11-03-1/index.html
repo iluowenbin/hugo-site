@@ -43,13 +43,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/2019-11-03-1/" />
 <meta property="article:published_time" content="2019-11-03T23:54:09+08:00" />
-<meta property="article:modified_time" content="2019-11-05T00:44:15+08:00" />
+<meta property="article:modified_time" content="2019-11-05T10:30:03+08:00" />
 <meta itemprop="name" content="快速利用Hugo搭建个人博客">
 <meta itemprop="description" content="从零开始使用Hugo和github Pages搭建静态博客">
 
 
 <meta itemprop="datePublished" content="2019-11-03T23:54:09&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T00:44:15&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-05T10:30:03&#43;08:00" />
 <meta itemprop="wordCount" content="893">
 
 
@@ -173,11 +173,11 @@
 <li><p>mac系统建议安装Homebrew，已安装可以跳过，打开终端；</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">brew install hugo
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">brew install hugo
 hugo version</code></pre></td></tr></table>
 </div>
 </div></li>
@@ -209,11 +209,11 @@ hugo help</code></pre></td></tr></table>
 <li><p>创建网站根目录，后续主要命令都在此目录下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">cd ~/Blog
 hugo new site hugo-site</code></pre></td></tr></table>
 </div>
 </div></li>
@@ -225,18 +225,18 @@ hugo new site hugo-site</code></pre></td></tr></table>
 <li><p>推荐even主题，直接套用config框架，酥胡～</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/hugo-site
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">cd ~/Blog/hugo-site
 mkdir themes
 git clone https://github.com/olOwOlo/hugo-theme-even themes/even
 rm config.toml
-cp themes/even/exampleSite/config.toml . <span class="c1"># 直接替换config文件，后续可以慢慢修改配置</span></code></pre></td></tr></table>
+cp themes/even/exampleSite/config.toml . # 直接替换config文件，后续可以慢慢修改配置</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -249,11 +249,11 @@ cp themes/even/exampleSite/config.toml . <span class="c1"># 直接替换config�
 <li><p>部分主题是posts，部分是post，如果这里错误可能会导致网站首页没有文章目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/hugo-site
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">cd ~/Blog/hugo-site
 hugo new post/my-first-post.md</code></pre></td></tr></table>
 </div>
 </div></li>
@@ -269,10 +269,10 @@ hugo new post/my-first-post.md</code></pre></td></tr></table>
 <li><p><a href="http://localhost:1313">http://localhost:1313</a> preview</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">hugo server -D -d dev</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">hugo server -D -d dev</code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -300,13 +300,13 @@ hugo new post/my-first-post.md</code></pre></td></tr></table>
 <li><p>初始化git仓库，cat后可以看到分支和远端信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> ~/Blog/hugo-site
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">cd ~/Blog/hugo-site
 git init
 git remote add origin git remote add origin git@github.com:iluowenbin/iluowenbin.site.git
 cat .git/config</code></pre></td></tr></table>
@@ -360,7 +360,7 @@ git push -u origin master</code></pre></td></tr></table>
     <span class="item-title">LastMod</span>
     <span class="item-content">
         2019-11-05
-        <a href="/commit/0656a18aaf93bff16a5f9d99754ab6e320572037" title="update">(0656a18)</a>
+        <a href="/commit/34524018e2b4f34e4f365148fd7bb3eb7fd5ee4c" title="add gitment">(3452401)</a>
     </span>
   </p>
   
