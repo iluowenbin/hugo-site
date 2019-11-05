@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>JVM GC原因了解 - Sakura&#39;s space</title>
+  <title>Java基础-重写与重载 - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="jvm垃圾回收了解" /><meta name="keywords" content="JVM, GC, Java" />
+<meta name="author" content="sakura" /><meta name="description" content="重写与重载，傻傻分不清" /><meta name="keywords" content="Java" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-04/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11-06/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="JVM GC原因了解" />
-<meta property="og:description" content="jvm垃圾回收了解" />
+<meta property="og:title" content="Java基础-重写与重载" />
+<meta property="og:description" content="重写与重载，傻傻分不清" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-04/" />
-<meta property="article:published_time" content="2019-11-05T11:03:20+08:00" />
-<meta property="article:modified_time" content="2019-11-05T11:03:20+08:00" />
-<meta itemprop="name" content="JVM GC原因了解">
-<meta itemprop="description" content="jvm垃圾回收了解">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11-06/" />
+<meta property="article:published_time" content="2019-11-05T17:03:20+08:00" />
+<meta property="article:modified_time" content="2019-11-05T17:03:20+08:00" />
+<meta itemprop="name" content="Java基础-重写与重载">
+<meta itemprop="description" content="重写与重载，傻傻分不清">
 
 
-<meta itemprop="datePublished" content="2019-11-05T11:03:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T11:03:20&#43;08:00" />
-<meta itemprop="wordCount" content="1298">
+<meta itemprop="datePublished" content="2019-11-05T17:03:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-05T17:03:20&#43;08:00" />
+<meta itemprop="wordCount" content="753">
 
 
 
-<meta itemprop="keywords" content="Java,GC,Heap,JVM," />
+<meta itemprop="keywords" content="Java," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JVM GC原因了解"/>
-<meta name="twitter:description" content="jvm垃圾回收了解"/>
+<meta name="twitter:title" content="Java基础-重写与重载"/>
+<meta name="twitter:description" content="重写与重载，傻傻分不清"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">JVM GC原因了解</h1>
+      <h1 class="post-title">Java基础-重写与重载</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-11-05 </span>
         <div class="post-category">
             <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 1298 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 753 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -142,10 +142,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#前言"><strong>前言</strong></a>
+<li><a href="#前言">前言</a>
 <ul>
-<li><a href="#堆内存介绍"><strong>堆内存介绍</strong></a></li>
-<li><a href="#触发jvm-gc原因及应对策略"><strong>触发JVM GC原因及应对策略</strong></a></li>
+<li><a href="#重写-override">重写(override)</a></li>
+<li><a href="#方法的重写规则">方法的重写规则</a></li>
+<li><a href="#重载-overloading">重载(overloading)</a></li>
+<li><a href="#重载的规则">重载的规则</a></li>
+<li><a href="#总结">总结</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -156,96 +159,57 @@
     <div class="post-content">
       
 
-<h3 id="前言"><strong>前言</strong></h3>
+<h3 id="前言">前言</h3>
 
-<p>前阵子写了个bug，线上服务跑了十几天后突然不断gc，cpu嗨到90%，排查问题的过程回顾了下java gc相关的知识。</p>
+<p>重载（Overloading）和重写（Overriding）是Java中两个比较重要的概念，但是又常常容易混淆</p>
 
-<h4 id="堆内存介绍"><strong>堆内存介绍</strong></h4>
-
-<ol>
-<li>堆内存分为Eden，Survivor，Tenured/old空间;</li>
-<li>从年轻代空间（包括 Eden 和 Survivor 区域）回收内存被称为 Minor GC;</li>
-<li>对老年代GC称为Major GC;</li>
-<li>Major GC的速度一般会比Minor GC慢10倍以上;</li>
-</ol>
-
-<h4 id="触发jvm-gc原因及应对策略"><strong>触发JVM GC原因及应对策略</strong></h4>
-
-<p><strong>1. System.gc()方法的调用</strong></p>
+<h4 id="重写-override">重写(override)</h4>
 
 <ul>
-<li><p>建议能不使用此方法就别使用，让虚拟机自己去管理它的内存，可禁止RMI调用System.gc;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-shell script" data-lang="shell script">-XX:+ DisableExplicitGC</code></pre></td></tr></table>
-</div>
-</div></li>
+<li>允许访问：即非private方法;</li>
+<li>重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。即外壳不变，核心重写！</li>
 </ul>
 
-<p><strong>2. 老年代空间不足</strong></p>
+<h4 id="方法的重写规则">方法的重写规则</h4>
 
 <ul>
-<li><p>老年代空间只有在新生代对象转入及创建为大对象、大数组时才会出现不足的现象，当执行Full GC后空间仍然不足，则抛出如下错误;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">java.lang.OutOfMemoryError: Java heap space</pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>为避免以上两种状况引起的Full GC，调优时应尽量做到让对象在Minor GC阶段被回收、让对象在新生代多存活一段时间及不要创建过大的对象及数组;</li>
-</ul></li>
+<li>参数列表必须相同;</li>
+<li>返回类型与被重写方法的返回类型可以不相同，但是必须是父类返回值的派生类;</li>
+<li>访问权限不能比父类中被重写的方法的访问权限更低;</li>
+<li>父类的成员方法只能被它的子类重写;</li>
+<li>声明为final的方法不能被重写;</li>
+<li>声明为static的方法不能被重写，但是能够被再次声明;</li>
+<li>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法;</li>
+<li>子类和父类不在同一个包中，那么子类只能够重写父类的声明为public和protected的非final方法;</li>
+<li>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以;</li>
+<li>构造方法不能被重写;</li>
+<li>如果不能继承一个方法，则不能重写这个方法;</li>
 </ul>
 
-<p><strong>3. 永生区空间不足</strong></p>
+<h4 id="重载-overloading">重载(overloading)</h4>
 
 <ul>
-<li>JVM规范中运行时数据区域中的方法区，在HotSpot虚拟机中又被习惯称为永生代或者永生区;</li>
-
-<li><p>Permanet Generation中存放的为一些class的信息、常量、静态变量等数据，当系统中要加载的类、反射的类和调用的方法较多时，Permanet Generation可能会被占满，在未配置为采用CMS GC的情况下也会执行Full GC。如果经过Full GC仍然回收不了，那么JVM会抛出如下错误信息:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">java.lang.OutOfMemoryError: PermGen space</pre></td></tr></table>
-</div>
-</div></li>
-
-<li><p>为避免Perm Gen占满造成Full GC现象，可采用的方法为增大Perm Gen空间或转为使用CMS GC;</p></li>
+<li>是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同；</li>
+<li>每个重载的方法（或者构造函数）都必须有一个独一无二的参数类型列表;</li>
+<li>最常用的地方就是构造器的重载;</li>
 </ul>
 
-<p><strong>4. CMS GC时出现promotion failed和concurrent mode failure</strong></p>
+<h4 id="重载的规则">重载的规则</h4>
 
 <ul>
-<li>promotion failed是在进行Minor GC时，survivor space放不下、对象只能放入老年代，而此时老年代也放不下造成的;</li>
-<li>concurrent mode failure是在执行CMS GC的过程中同时有对象要放入老年代，而此时老年代空间不足造成的（有时候“空间不足”是CMS GC时当前的浮动垃圾过多导致暂时性的空间不足触发Full GC）;</li>
-
-<li><p>增大survivor space、老年代空间或调低触发并发GC的比率可通过设置CMSMaxAbortablePrecleanTime来避免;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">-XX: CMSMaxAbortablePrecleanTime=5（单位为ms）</pre></td></tr></table>
-</div>
-</div></li>
+<li>被重载的方法必须改变参数列表(参数个数或类型不一样)；</li>
+<li>被重载的方法可以改变返回类型；</li>
+<li>被重载的方法可以改变访问修饰符；</li>
+<li>被重载的方法可以声明新的或更广的检查异常；</li>
+<li>方法能够在同一个类中或者在一个子类中被重载;</li>
+<li>无法以返回值类型作为重载函数的区分标准;</li>
 </ul>
 
-<p><strong>5. 堆中分配很大的对象</strong></p>
+<h4 id="总结">总结</h4>
 
 <ul>
-<li>所谓大对象，是指需要大量连续内存空间的java对象，例如很长的数组，此种对象会直接进入老年代，而老年代虽然有很大的剩余空间，但是无法找到足够大的连续空间来分配给当前对象，此种情况就会触发JVM进行Full GC;</li>
-<li>CMS垃圾收集器提供了一个可配置的参数，即-XX:+UseCMSCompactAtFullCollection开关参数，用于在“享受”完Full GC服务之后额外免费赠送一个碎片整理的过程，内存整理的过程无法并发的，空间碎片问题没有了，但提顿时间不得不变长了;</li>
-<li>JVM设计者们还提供了另外一个参数 -XX:CMSFullGCsBeforeCompaction,这个参数用于设置在执行多少次不压缩的Full GC后,跟着来一次带压缩的；</li>
+<li>说到底,方法重载是一个类的多态性表现,而方法重写是子类与父类的一种多态性表现。</li>
 </ul>
-
-<p><strong>6. 在程序中长期持有了对象的引用，对象年龄达到指定阈值也会进入老年代;</strong></p>
 
     </div>
 
@@ -267,18 +231,15 @@
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/java/">Java</a>
-          <a href="/tags/gc/">GC</a>
-          <a href="/tags/heap/">Heap</a>
-          <a href="/tags/jvm/">JVM</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-11-05/">
+        <a class="prev" href="/post/2019-11-07/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">JVM GC算法初探</span>
+            <span class="prev-text nav-default">Spark rdd算子调优</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/2019-11-03/">
-            <span class="next-text nav-default">Hugo博客进阶(二)</span>
+        <a class="next" href="/post/2019-11-05/">
+            <span class="next-text nav-default">JVM GC算法初探</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -291,10 +252,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-05 11:03:20 \x2b0800 CST',
-        title: 'JVM GC原因了解',
+        id: '2019-11-05 17:03:20 \x2b0800 CST',
+        title: 'Java基础-重写与重载',
         link: decodeURI(location.href),
-        desc: 'jvm垃圾回收了解',
+        desc: '重写与重载，傻傻分不清',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {
