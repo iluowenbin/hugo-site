@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Sakura&#39;s space</title>
-    <link>http://localhost:1313/post/</link>
+    <link>https://luowenbin.site/post/</link>
     <description>Recent content in Posts on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 05 Nov 2019 11:03:20 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://luowenbin.site/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>JVM GC原因了解</title>
-      <link>http://localhost:1313/post/2019-11-05-1/</link>
+      <link>https://luowenbin.site/post/2019-11-05-1/</link>
       <pubDate>Tue, 05 Nov 2019 11:03:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/2019-11-05-1/</guid>
+      <guid>https://luowenbin.site/post/2019-11-05-1/</guid>
       <description>jvm垃圾回收了解</description>
     </item>
     
     <item>
       <title>Hugo博客进阶(二)</title>
-      <link>http://localhost:1313/post/2019-11-04-2/</link>
+      <link>https://luowenbin.site/post/2019-11-04-2/</link>
       <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/2019-11-04-2/</guid>
+      <guid>https://luowenbin.site/post/2019-11-04-2/</guid>
       <description>利用gitment给博客添加评论功能</description>
     </item>
     
     <item>
       <title>Hugo博客进阶(一)</title>
-      <link>http://localhost:1313/post/2019-11-04-1/</link>
+      <link>https://luowenbin.site/post/2019-11-04-1/</link>
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/2019-11-04-1/</guid>
+      <guid>https://luowenbin.site/post/2019-11-04-1/</guid>
       <description>Github Pages配置个人域名，DNS解析配置</description>
     </item>
     
     <item>
       <title>快速利用Hugo搭建个人博客</title>
-      <link>http://localhost:1313/post/2019-11-03-1/</link>
+      <link>https://luowenbin.site/post/2019-11-03-1/</link>
       <pubDate>Sun, 03 Nov 2019 23:54:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/2019-11-03-1/</guid>
+      <guid>https://luowenbin.site/post/2019-11-03-1/</guid>
       <description>从零开始使用Hugo和Github Pages搭建静态博客</description>
     </item>
     
