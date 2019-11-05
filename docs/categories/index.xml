@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Nov 2019 11:03:20 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Nov 2019 20:03:20 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>blog</title>
       <link>http://localhost:1313/categories/blog/</link>
-      <pubDate>Tue, 05 Nov 2019 11:03:20 +0800</pubDate>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
       
       <guid>http://localhost:1313/categories/blog/</guid>
       <description></description>
