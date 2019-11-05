@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>github Pages</title>
+      <title>Github Pages</title>
       <link>http://localhost:1313/tags/github-pages/</link>
       <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
       
@@ -21,7 +21,16 @@
     </item>
     
     <item>
-      <title>hugo</title>
+      <title>gitment</title>
+      <link>http://localhost:1313/tags/gitment/</link>
+      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/gitment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
       <link>http://localhost:1313/tags/hugo/</link>
       <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
       
@@ -30,16 +39,7 @@
     </item>
     
     <item>
-      <title>tags</title>
-      <link>http://localhost:1313/tags/tags/</link>
-      <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/tags/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dns</title>
+      <title>DNS</title>
       <link>http://localhost:1313/tags/dns/</link>
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
       
@@ -48,7 +48,7 @@
     </item>
     
     <item>
-      <title>domain</title>
+      <title>DOMAIN</title>
       <link>http://localhost:1313/tags/domain/</link>
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
       

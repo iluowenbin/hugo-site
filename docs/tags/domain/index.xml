@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>domain on Sakura&#39;s space</title>
+    <title>DOMAIN on Sakura&#39;s space</title>
     <link>http://localhost:1313/tags/domain/</link>
-    <description>Recent content in domain on Sakura&#39;s space</description>
+    <description>Recent content in DOMAIN on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 04 Nov 2019 16:24:14 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
       
       <guid>http://localhost:1313/post/2019-11-04-1/</guid>
-      <description>github Pages配置个人域名，dns解析配置</description>
+      <description>Github Pages配置个人域名，DNS解析配置</description>
     </item>
     
   </channel>

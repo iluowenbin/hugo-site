@@ -16,11 +16,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Sakura" /><meta name="description" content="利用gitment给博客添加评论功能" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Sakura" /><meta name="description" content="利用gitment给博客添加评论功能" /><meta name="keywords" content="Hugo, DOMAIN, DNS" />
 
 
 
-
+<meta name="google-site-verification" content="UA-151550747-1" />
 
 
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
@@ -43,18 +43,18 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/2019-11-04-2/" />
 <meta property="article:published_time" content="2019-11-04T20:03:20+08:00" />
-<meta property="article:modified_time" content="2019-11-05T11:27:09+08:00" />
+<meta property="article:modified_time" content="2019-11-05T11:42:23+08:00" />
 <meta itemprop="name" content="Hugo博客进阶(2)">
 <meta itemprop="description" content="利用gitment给博客添加评论功能">
 
 
 <meta itemprop="datePublished" content="2019-11-04T20:03:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T11:27:09&#43;08:00" />
-<meta itemprop="wordCount" content="237">
+<meta itemprop="dateModified" content="2019-11-05T11:42:23&#43;08:00" />
+<meta itemprop="wordCount" content="330">
 
 
 
-<meta itemprop="keywords" content="hugo,github Pages,tags," />
+<meta itemprop="keywords" content="Hugo,Github Pages,gitment," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hugo博客进阶(2)"/>
 <meta name="twitter:description" content="利用gitment给博客添加评论功能"/>
@@ -125,9 +125,9 @@
       <div class="post-meta">
         <span class="post-time"> 2019-11-04 </span>
         <div class="post-category">
-            <a href="/categories/blog/"> blog </a>
+            <a href="/categories/blog/"> Blog </a>
             </div>
-          <span class="more-meta"> 237 words </span>
+          <span class="more-meta"> 330 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -142,7 +142,7 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#前言">前言</a>
 <ul>
 <li><a href="#1-申请gitment的oauth">1.申请gitment的Oauth</a></li>
 <li><a href="#2-填写config-toml">2.填写config.toml</a></li>
@@ -157,17 +157,22 @@
     <div class="post-content">
       
 
+<h3 id="前言">前言</h3>
+
+<p>Gitment 基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
+
 <h4 id="1-申请gitment的oauth">1.申请gitment的Oauth</h4>
 
 <ul>
 <li>点击<a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> 注册新的oauth id</li>
 <li>Homepage URL 和 Authorization callback URL 填写网站home就好</li>
+<li>注册完后会得到一个clientId和clientSecret
+<img src="https://i.loli.net/2019/11/05/WIpuv2mrVRwKZXl.png" alt="image.png" /></li>
+</ul>
 
-<li><p>注册完后会得到一个clientId和clientSecret
-<img src="https://i.loli.net/2019/11/05/WIpuv2mrVRwKZXl.png" alt="image.png" /></p>
+<h4 id="2-填写config-toml">2.填写config.toml</h4>
 
-<h4 id="2-填写config-toml">2.填写config.toml</h4></li>
-
+<ul>
 <li><p>如果你用的是even主题，直接将信息填写进去就好了</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -186,13 +191,15 @@
     clientId = &#34;xxxxx&#34;           
     clientSecret = &#34;xxxxx&#34;</pre></td></tr></table>
 </div>
-</div>
-<h4 id="3-初始化gitment">3.初始化gitment</h4></li>
+</div></li>
+</ul>
 
-<li><p>未初始化之前会有init提醒</p></li>
+<h4 id="3-初始化gitment">3.初始化gitment</h4>
 
-<li><p>登录github并init评论，之后其他用户就可以评论你的博客啦
-<img src="https://i.loli.net/2019/11/05/opWvcHOBEaVz9GS.png" alt="image.png" /></p></li>
+<ul>
+<li>未初始化之前会有init提醒</li>
+<li>登录github并init评论，之后其他用户就可以评论你的博客啦
+<img src="https://i.loli.net/2019/11/05/opWvcHOBEaVz9GS.png" alt="image.png" /></li>
 </ul>
 
     </div>
@@ -206,7 +213,7 @@
     <span class="item-title">LastMod</span>
     <span class="item-content">
         2019-11-05
-        <a href="/commit/7d934ec8b7cf269b81f8602ac256f8a039bb4253" title="add new post">(7d934ec)</a>
+        <a href="/commit/bfb08691d60d5e4ed3b0e3dec0375ea04c09ffc6" title="update">(bfb0869)</a>
     </span>
   </p>
   
@@ -214,9 +221,9 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/hugo/">hugo</a>
-          <a href="/tags/github-pages/">github Pages</a>
-          <a href="/tags/tags/">tags</a>
+          <a href="/tags/hugo/">Hugo</a>
+          <a href="/tags/github-pages/">Github Pages</a>
+          <a href="/tags/gitment/">gitment</a>
           </div>
       <nav class="post-nav">
         
@@ -258,20 +265,13 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="lwbwenbin@163.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://twitter.com/your-user-name" class="iconfont icon-twitter" title="twitter"></a>
       <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
       <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
-      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
-      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
-      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="https://github.com/iluowenbin" class="iconfont icon-github" title="github"></a>
+      <a href="http://weibo.com/your-user-name" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://www.zhihu.com/people/your-user-name" class="iconfont icon-zhihu" title="zhihu"></a>
       <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
-      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
       <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
   <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
