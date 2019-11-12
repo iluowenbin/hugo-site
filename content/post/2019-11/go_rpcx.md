@@ -1,12 +1,12 @@
 ---
-title: "2019 11 11"
+title: "什么是RPCX？"
 date: 2019-11-11T18:15:49+08:00
-draft: false
+draft: true
 tags: ["go","rpcx"]
 tags_weight: 66
-categories: ["go"]
+categories: ["Learning"]
 keywords: ["rpc","rpcx","go"]
-summary: "rpcx"
+summary: "了解一下RPCX框架"
 ---
 #### 什么是rpc
 远程过程调用（英语：Remote Procedure Call，缩写为 RPC）是一个计算机通信协议。该协议允许运行于一台计算机的程序调用另一台计算机的子程序，

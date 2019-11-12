@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Hugo博客进阶(一) - Sakura&#39;s space</title>
+  <title>JVM GC原因了解 - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="Github Pages配置个人域名，DNS解析配置" /><meta name="keywords" content="Hugo, DOMAIN, DNS" />
+<meta name="author" content="sakura" /><meta name="description" content="jvm垃圾回收了解" /><meta name="keywords" content="JVM, GC, Java" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-02/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11/jvm_gc/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Hugo博客进阶(一)" />
-<meta property="og:description" content="Github Pages配置个人域名，DNS解析配置" />
+<meta property="og:title" content="JVM GC原因了解" />
+<meta property="og:description" content="jvm垃圾回收了解" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-02/" />
-<meta property="article:published_time" content="2019-11-04T16:24:14+08:00" />
-<meta property="article:modified_time" content="2019-11-04T16:24:14+08:00" />
-<meta itemprop="name" content="Hugo博客进阶(一)">
-<meta itemprop="description" content="Github Pages配置个人域名，DNS解析配置">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11/jvm_gc/" />
+<meta property="article:published_time" content="2019-11-05T11:03:20+08:00" />
+<meta property="article:modified_time" content="2019-11-05T11:03:20+08:00" />
+<meta itemprop="name" content="JVM GC原因了解">
+<meta itemprop="description" content="jvm垃圾回收了解">
 
 
-<meta itemprop="datePublished" content="2019-11-04T16:24:14&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-04T16:24:14&#43;08:00" />
-<meta itemprop="wordCount" content="630">
+<meta itemprop="datePublished" content="2019-11-05T11:03:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-05T11:03:20&#43;08:00" />
+<meta itemprop="wordCount" content="1298">
 
 
 
-<meta itemprop="keywords" content="Hugo,Github Pages,DOMAIN,DNS," />
+<meta itemprop="keywords" content="Java,GC,Heap,JVM," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hugo博客进阶(一)"/>
-<meta name="twitter:description" content="Github Pages配置个人域名，DNS解析配置"/>
+<meta name="twitter:title" content="JVM GC原因了解"/>
+<meta name="twitter:description" content="jvm垃圾回收了解"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Hugo博客进阶(一)</h1>
+      <h1 class="post-title">JVM GC原因了解</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-11-04 </span>
+        <span class="post-time"> 2019-11-05 </span>
         <div class="post-category">
-            <a href="/categories/blog/"> Blog </a>
+            <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 630 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1298 words </span>
+          <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
@@ -142,13 +142,10 @@
 <ul>
 <li>
 <ul>
-<li><a href="#前言">前言</a>
+<li><a href="#前言"><strong>前言</strong></a>
 <ul>
-<li><a href="#1-前提">1.前提</a></li>
-<li><a href="#2-购买域名">2.购买域名</a></li>
-<li><a href="#3-配置个人域名到githubpages">3.配置个人域名到githubPages</a></li>
-<li><a href="#4-添加dns解析">4.添加DNS解析</a></li>
-<li><a href="#5-打开个人域名">5.打开个人域名</a></li>
+<li><a href="#堆内存介绍"><strong>堆内存介绍</strong></a></li>
+<li><a href="#触发jvm-gc原因及应对策略"><strong>触发JVM GC原因及应对策略</strong></a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -159,64 +156,96 @@
     <div class="post-content">
       
 
-<h3 id="前言">前言</h3>
+<h3 id="前言"><strong>前言</strong></h3>
 
-<p>本文介绍了如何将自己的静态网站托管到github后，在阿里云上购买个人域名并利用免费的DNS服务在github Pages上以https协议加载个人域名。</p>
+<p>前阵子写了个bug，线上服务跑了十几天后突然不断gc，cpu嗨到90%，排查问题的过程回顾了下java gc相关的知识。</p>
 
-<h4 id="1-前提">1.前提</h4>
+<h4 id="堆内存介绍"><strong>堆内存介绍</strong></h4>
+
+<ol>
+<li>堆内存分为Eden，Survivor，Tenured/old空间;</li>
+<li>从年轻代空间（包括 Eden 和 Survivor 区域）回收内存被称为 Minor GC;</li>
+<li>对老年代GC称为Major GC;</li>
+<li>Major GC的速度一般会比Minor GC慢10倍以上;</li>
+</ol>
+
+<h4 id="触发jvm-gc原因及应对策略"><strong>触发JVM GC原因及应对策略</strong></h4>
+
+<p><strong>1. System.gc()方法的调用</strong></p>
 
 <ul>
-<li>保证访问<a href="https://username.github.io">https://username.github.io</a> 能够正确访问你的网站</li>
-<li>如果你还没有试过使用Hugo+github Pages搭建博客，欢迎查看我的上一篇教程<a href="https://luowenbin.site/post/2019-11-03-1/">https://luowenbin.site/post/2019-11-03-1/</a></li>
+<li><p>建议能不使用此方法就别使用，让虚拟机自己去管理它的内存，可禁止RMI调用System.gc;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell script" data-lang="shell script">-XX:+ DisableExplicitGC</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<h4 id="2-购买域名">2.购买域名</h4>
+<p><strong>2. 老年代空间不足</strong></p>
 
 <ul>
-<li>前往<a href="https://account.aliyun.com/">https://account.aliyun.com/</a> 挑选域名，推荐暂时购买1年，后续网站稳定了再购买5年或者10年</li>
-<li>域名最好买可以备案的域名，后续可以省很多事</li>
-<li>购买域名前需要验证邮箱，实名认证，阿里十分迅速，大约5分钟可以搞掂</li>
-</ul>
-
-<h4 id="3-配置个人域名到githubpages">3.配置个人域名到githubPages</h4>
-
-<ul>
-<li><p>添加CNAME文件到/static目录，以后构建时就会自动生成一份到/docs，文件内容即为domain</p>
+<li><p>老年代空间只有在新生代对象转入及创建为大对象、大数组时才会出现不足的现象，当执行Full GC后空间仍然不足，则抛出如下错误;</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">username.site</pre></td></tr></table>
+<pre class="chroma">java.lang.OutOfMemoryError: Java heap space</pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>为避免以上两种状况引起的Full GC，调优时应尽量做到让对象在Minor GC阶段被回收、让对象在新生代多存活一段时间及不要创建过大的对象及数组;</li>
+</ul></li>
+</ul>
+
+<p><strong>3. 永生区空间不足</strong></p>
+
+<ul>
+<li>JVM规范中运行时数据区域中的方法区，在HotSpot虚拟机中又被习惯称为永生代或者永生区;</li>
+
+<li><p>Permanet Generation中存放的为一些class的信息、常量、静态变量等数据，当系统中要加载的类、反射的类和调用的方法较多时，Permanet Generation可能会被占满，在未配置为采用CMS GC的情况下也会执行Full GC。如果经过Full GC仍然回收不了，那么JVM会抛出如下错误信息:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">java.lang.OutOfMemoryError: PermGen space</pre></td></tr></table>
 </div>
 </div></li>
 
-<li><p>构建hugo并提交</p></li>
-
-<li><p>到settting页面检查是否自动加载了domain
-<img src="https://i.loli.net/2019/11/05/j6bNMmzq5Rsa2LK.png" alt="image.png" /></p></li>
-
-<li><p>如果失败，检查一下/docs目录下是否有CNAME文件</p></li>
+<li><p>为避免Perm Gen占满造成Full GC现象，可采用的方法为增大Perm Gen空间或转为使用CMS GC;</p></li>
 </ul>
 
-<h4 id="4-添加dns解析">4.添加DNS解析</h4>
+<p><strong>4. CMS GC时出现promotion failed和concurrent mode failure</strong></p>
 
 <ul>
-<li>重复ping一下你的username.github.io，得到2个以上ip</li>
-<li>到域名控制台进入解析设置，添加3个记录
-<img src="https://i.loli.net/2019/11/05/luByswWTp1L2afo.png" alt="image.png" /></li>
-<li>1-2分钟后查看githubPages配置，已经被解析成功
-<img src="https://i.loli.net/2019/11/05/TGBHhUOplPv7mW6.png" alt="image.png" /></li>
-<li>开启https
-<img src="https://i.loli.net/2019/11/05/enWzcgyE9x18aOR.png" alt="image.png" /></li>
-<li>如果提示失败，请检查下域名是否正常状态；添加的记录ip是否正确</li>
+<li>promotion failed是在进行Minor GC时，survivor space放不下、对象只能放入老年代，而此时老年代也放不下造成的;</li>
+<li>concurrent mode failure是在执行CMS GC的过程中同时有对象要放入老年代，而此时老年代空间不足造成的（有时候“空间不足”是CMS GC时当前的浮动垃圾过多导致暂时性的空间不足触发Full GC）;</li>
+
+<li><p>增大survivor space、老年代空间或调低触发并发GC的比率可通过设置CMSMaxAbortablePrecleanTime来避免;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">-XX: CMSMaxAbortablePrecleanTime=5（单位为ms）</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<h4 id="5-打开个人域名">5.打开个人域名</h4>
+<p><strong>5. 堆中分配很大的对象</strong></p>
 
 <ul>
-<li>点击<a href="https://luowenbin.site/">https://luowenbin.site/</a> 访问成功</li>
+<li>所谓大对象，是指需要大量连续内存空间的java对象，例如很长的数组，此种对象会直接进入老年代，而老年代虽然有很大的剩余空间，但是无法找到足够大的连续空间来分配给当前对象，此种情况就会触发JVM进行Full GC;</li>
+<li>CMS垃圾收集器提供了一个可配置的参数，即-XX:+UseCMSCompactAtFullCollection开关参数，用于在“享受”完Full GC服务之后额外免费赠送一个碎片整理的过程，内存整理的过程无法并发的，空间碎片问题没有了，但提顿时间不得不变长了;</li>
+<li>JVM设计者们还提供了另外一个参数 -XX:CMSFullGCsBeforeCompaction,这个参数用于设置在执行多少次不压缩的Full GC后,跟着来一次带压缩的；</li>
 </ul>
+
+<p><strong>6. 在程序中长期持有了对象的引用，对象年龄达到指定阈值也会进入老年代;</strong></p>
 
     </div>
 
@@ -228,7 +257,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-04
+        2019-11-05
         
     </span>
   </p>
@@ -237,19 +266,19 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/hugo/">Hugo</a>
-          <a href="/tags/github-pages/">Github Pages</a>
-          <a href="/tags/domain/">DOMAIN</a>
-          <a href="/tags/dns/">DNS</a>
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/gc/">GC</a>
+          <a href="/tags/heap/">Heap</a>
+          <a href="/tags/jvm/">JVM</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-11-03/">
+        <a class="prev" href="/post/2019-11/jvm_gc_collectors/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Hugo博客进阶(二)</span>
+            <span class="prev-text nav-default">JVM GC算法初探</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/2019-11-01/">
-            <span class="next-text nav-default">快速利用Hugo搭建个人博客</span>
+        <a class="next" href="/post/2019-11/blog_advance02/">
+            <span class="next-text nav-default">Hugo博客进阶(二)</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -262,10 +291,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-04 16:24:14 \x2b0800 CST',
-        title: 'Hugo博客进阶(一)',
+        id: '2019-11-05 11:03:20 \x2b0800 CST',
+        title: 'JVM GC原因了解',
         link: decodeURI(location.href),
-        desc: 'Github Pages配置个人域名，DNS解析配置',
+        desc: 'jvm垃圾回收了解',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {

@@ -6,71 +6,80 @@
     <description>Recent content in Posts on Sakura&#39;s space</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Nov 2019 17:44:57 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Nov 2019 11:05:37 +0800</lastBuildDate>
     
 	<atom:link href="https://luowenbin.site/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>windows和linux环境下网络延迟模拟</title>
+      <link>https://luowenbin.site/post/2019-11/http_delay/</link>
+      <pubDate>Tue, 12 Nov 2019 11:05:37 +0800</pubDate>
+      
+      <guid>https://luowenbin.site/post/2019-11/http_delay/</guid>
+      <description>利用tc和clumsy模拟网络延迟</description>
+    </item>
+    
+    <item>
       <title>Spark rdd算子调优</title>
-      <link>https://luowenbin.site/post/2019-11-07/</link>
+      <link>https://luowenbin.site/post/2019-11/spark_rdd/</link>
       <pubDate>Tue, 05 Nov 2019 17:44:57 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-07/</guid>
+      <guid>https://luowenbin.site/post/2019-11/spark_rdd/</guid>
       <description>rdd 算子调优方法</description>
     </item>
     
     <item>
       <title>Java基础-重写与重载</title>
-      <link>https://luowenbin.site/post/2019-11-06/</link>
+      <link>https://luowenbin.site/post/2019-11/override_overload/</link>
       <pubDate>Tue, 05 Nov 2019 17:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-06/</guid>
+      <guid>https://luowenbin.site/post/2019-11/override_overload/</guid>
       <description>重写与重载，傻傻分不清</description>
     </item>
     
     <item>
       <title>JVM GC算法初探</title>
-      <link>https://luowenbin.site/post/2019-11-05/</link>
+      <link>https://luowenbin.site/post/2019-11/jvm_gc_collectors/</link>
       <pubDate>Tue, 05 Nov 2019 16:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-05/</guid>
+      <guid>https://luowenbin.site/post/2019-11/jvm_gc_collectors/</guid>
       <description>jvm垃圾回收算法了解</description>
     </item>
     
     <item>
       <title>JVM GC原因了解</title>
-      <link>https://luowenbin.site/post/2019-11-04/</link>
+      <link>https://luowenbin.site/post/2019-11/jvm_gc/</link>
       <pubDate>Tue, 05 Nov 2019 11:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-04/</guid>
+      <guid>https://luowenbin.site/post/2019-11/jvm_gc/</guid>
       <description>jvm垃圾回收了解</description>
     </item>
     
     <item>
       <title>Hugo博客进阶(二)</title>
-      <link>https://luowenbin.site/post/2019-11-03/</link>
+      <link>https://luowenbin.site/post/2019-11/blog_advance02/</link>
       <pubDate>Mon, 04 Nov 2019 20:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-03/</guid>
+      <guid>https://luowenbin.site/post/2019-11/blog_advance02/</guid>
       <description>利用gitment给博客添加评论功能</description>
     </item>
     
     <item>
       <title>Hugo博客进阶(一)</title>
-      <link>https://luowenbin.site/post/2019-11-02/</link>
+      <link>https://luowenbin.site/post/2019-11/blog_advance01/</link>
       <pubDate>Mon, 04 Nov 2019 16:24:14 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-02/</guid>
+      <guid>https://luowenbin.site/post/2019-11/blog_advance01/</guid>
       <description>Github Pages配置个人域名，DNS解析配置</description>
     </item>
     
     <item>
       <title>快速利用Hugo搭建个人博客</title>
-      <link>https://luowenbin.site/post/2019-11-01/</link>
+      <link>https://luowenbin.site/post/2019-11/blog_build/</link>
       <pubDate>Sun, 03 Nov 2019 23:54:09 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-01/</guid>
+      <guid>https://luowenbin.site/post/2019-11/blog_build/</guid>
       <description>从零开始使用Hugo和Github Pages搭建静态博客</description>
     </item>
     

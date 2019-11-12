@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Hugo博客进阶(二) - Sakura&#39;s space</title>
+  <title>Java基础-重写与重载 - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="利用gitment给博客添加评论功能" /><meta name="keywords" content="Hugo, DOMAIN, DNS" />
+<meta name="author" content="sakura" /><meta name="description" content="重写与重载，傻傻分不清" /><meta name="keywords" content="Java" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-03/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11/override_overload/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Hugo博客进阶(二)" />
-<meta property="og:description" content="利用gitment给博客添加评论功能" />
+<meta property="og:title" content="Java基础-重写与重载" />
+<meta property="og:description" content="重写与重载，傻傻分不清" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-03/" />
-<meta property="article:published_time" content="2019-11-04T20:03:20+08:00" />
-<meta property="article:modified_time" content="2019-11-04T20:03:20+08:00" />
-<meta itemprop="name" content="Hugo博客进阶(二)">
-<meta itemprop="description" content="利用gitment给博客添加评论功能">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11/override_overload/" />
+<meta property="article:published_time" content="2019-11-05T17:03:20+08:00" />
+<meta property="article:modified_time" content="2019-11-05T17:03:20+08:00" />
+<meta itemprop="name" content="Java基础-重写与重载">
+<meta itemprop="description" content="重写与重载，傻傻分不清">
 
 
-<meta itemprop="datePublished" content="2019-11-04T20:03:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-04T20:03:20&#43;08:00" />
-<meta itemprop="wordCount" content="330">
+<meta itemprop="datePublished" content="2019-11-05T17:03:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-05T17:03:20&#43;08:00" />
+<meta itemprop="wordCount" content="753">
 
 
 
-<meta itemprop="keywords" content="Hugo,Github Pages,gitment," />
+<meta itemprop="keywords" content="Java," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hugo博客进阶(二)"/>
-<meta name="twitter:description" content="利用gitment给博客添加评论功能"/>
+<meta name="twitter:title" content="Java基础-重写与重载"/>
+<meta name="twitter:description" content="重写与重载，傻傻分不清"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Hugo博客进阶(二)</h1>
+      <h1 class="post-title">Java基础-重写与重载</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-11-04 </span>
+        <span class="post-time"> 2019-11-05 </span>
         <div class="post-category">
-            <a href="/categories/blog/"> Blog </a>
+            <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 330 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 753 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -144,9 +144,11 @@
 <ul>
 <li><a href="#前言">前言</a>
 <ul>
-<li><a href="#1-申请gitment的oauth">1.申请gitment的Oauth</a></li>
-<li><a href="#2-填写config-toml">2.填写config.toml</a></li>
-<li><a href="#3-初始化gitment">3.初始化gitment</a></li>
+<li><a href="#重写-override">重写(override)</a></li>
+<li><a href="#方法的重写规则">方法的重写规则</a></li>
+<li><a href="#重载-overloading">重载(overloading)</a></li>
+<li><a href="#重载的规则">重载的规则</a></li>
+<li><a href="#总结">总结</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -159,47 +161,54 @@
 
 <h3 id="前言">前言</h3>
 
-<p>Gitment 基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
+<p>重载（Overloading）和重写（Overriding）是Java中两个比较重要的概念，但是又常常容易混淆</p>
 
-<h4 id="1-申请gitment的oauth">1.申请gitment的Oauth</h4>
+<h4 id="重写-override">重写(override)</h4>
 
 <ul>
-<li>点击<a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> 注册新的oauth id</li>
-<li>Homepage URL 和 Authorization callback URL 填写网站home就好</li>
-<li>注册完后会得到一个clientId和clientSecret
-<img src="https://i.loli.net/2019/11/05/WIpuv2mrVRwKZXl.png" alt="image.png" /></li>
+<li>允许访问：即非private方法;</li>
+<li>重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。即外壳不变，核心重写！</li>
 </ul>
 
-<h4 id="2-填写config-toml">2.填写config.toml</h4>
+<h4 id="方法的重写规则">方法的重写规则</h4>
 
 <ul>
-<li><p>如果你用的是even主题，直接将信息填写进去就好了</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">[params]
-[params.gitment]          
-    owner = &#34;iluowenbin&#34;              
-    repo = &#34;hugo-site&#34;               
-    clientId = &#34;xxxxx&#34;           
-    clientSecret = &#34;xxxxx&#34;</pre></td></tr></table>
-</div>
-</div></li>
+<li>参数列表必须相同;</li>
+<li>返回类型与被重写方法的返回类型可以不相同，但是必须是父类返回值的派生类;</li>
+<li>访问权限不能比父类中被重写的方法的访问权限更低;</li>
+<li>父类的成员方法只能被它的子类重写;</li>
+<li>声明为final的方法不能被重写;</li>
+<li>声明为static的方法不能被重写，但是能够被再次声明;</li>
+<li>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法;</li>
+<li>子类和父类不在同一个包中，那么子类只能够重写父类的声明为public和protected的非final方法;</li>
+<li>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以;</li>
+<li>构造方法不能被重写;</li>
+<li>如果不能继承一个方法，则不能重写这个方法;</li>
 </ul>
 
-<h4 id="3-初始化gitment">3.初始化gitment</h4>
+<h4 id="重载-overloading">重载(overloading)</h4>
 
 <ul>
-<li>未初始化之前会有init提醒</li>
-<li>登录github并init评论，之后其他用户就可以评论你的博客啦
-<img src="https://i.loli.net/2019/11/05/opWvcHOBEaVz9GS.png" alt="image.png" /></li>
+<li>是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同；</li>
+<li>每个重载的方法（或者构造函数）都必须有一个独一无二的参数类型列表;</li>
+<li>最常用的地方就是构造器的重载;</li>
+</ul>
+
+<h4 id="重载的规则">重载的规则</h4>
+
+<ul>
+<li>被重载的方法必须改变参数列表(参数个数或类型不一样)；</li>
+<li>被重载的方法可以改变返回类型；</li>
+<li>被重载的方法可以改变访问修饰符；</li>
+<li>被重载的方法可以声明新的或更广的检查异常；</li>
+<li>方法能够在同一个类中或者在一个子类中被重载;</li>
+<li>无法以返回值类型作为重载函数的区分标准;</li>
+</ul>
+
+<h4 id="总结">总结</h4>
+
+<ul>
+<li>说到底,方法重载是一个类的多态性表现,而方法重写是子类与父类的一种多态性表现。</li>
 </ul>
 
     </div>
@@ -212,7 +221,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-04
+        2019-11-05
         
     </span>
   </p>
@@ -221,18 +230,16 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/hugo/">Hugo</a>
-          <a href="/tags/github-pages/">Github Pages</a>
-          <a href="/tags/gitment/">gitment</a>
+          <a href="/tags/java/">Java</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-11-04/">
+        <a class="prev" href="/post/2019-11/spark_rdd/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">JVM GC原因了解</span>
+            <span class="prev-text nav-default">Spark rdd算子调优</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/2019-11-02/">
-            <span class="next-text nav-default">Hugo博客进阶(一)</span>
+        <a class="next" href="/post/2019-11/jvm_gc_collectors/">
+            <span class="next-text nav-default">JVM GC算法初探</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -245,10 +252,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-04 20:03:20 \x2b0800 CST',
-        title: 'Hugo博客进阶(二)',
+        id: '2019-11-05 17:03:20 \x2b0800 CST',
+        title: 'Java基础-重写与重载',
         link: decodeURI(location.href),
-        desc: '利用gitment给博客添加评论功能',
+        desc: '重写与重载，傻傻分不清',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {

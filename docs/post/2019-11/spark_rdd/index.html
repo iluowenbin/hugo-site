@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Java基础-重写与重载 - Sakura&#39;s space</title>
+  <title>Spark rdd算子调优 - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="重写与重载，傻傻分不清" /><meta name="keywords" content="Java" />
+<meta name="author" content="sakura" /><meta name="description" content="rdd 算子调优方法" /><meta name="keywords" content="Spark, rdd" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-06/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11/spark_rdd/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Java基础-重写与重载" />
-<meta property="og:description" content="重写与重载，傻傻分不清" />
+<meta property="og:title" content="Spark rdd算子调优" />
+<meta property="og:description" content="rdd 算子调优方法" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-06/" />
-<meta property="article:published_time" content="2019-11-05T17:03:20+08:00" />
-<meta property="article:modified_time" content="2019-11-05T17:03:20+08:00" />
-<meta itemprop="name" content="Java基础-重写与重载">
-<meta itemprop="description" content="重写与重载，傻傻分不清">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11/spark_rdd/" />
+<meta property="article:published_time" content="2019-11-05T17:44:57+08:00" />
+<meta property="article:modified_time" content="2019-11-05T17:44:57+08:00" />
+<meta itemprop="name" content="Spark rdd算子调优">
+<meta itemprop="description" content="rdd 算子调优方法">
 
 
-<meta itemprop="datePublished" content="2019-11-05T17:03:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T17:03:20&#43;08:00" />
-<meta itemprop="wordCount" content="753">
+<meta itemprop="datePublished" content="2019-11-05T17:44:57&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-05T17:44:57&#43;08:00" />
+<meta itemprop="wordCount" content="1046">
 
 
 
-<meta itemprop="keywords" content="Java," />
+<meta itemprop="keywords" content="Spark,rdd," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Java基础-重写与重载"/>
-<meta name="twitter:description" content="重写与重载，傻傻分不清"/>
+<meta name="twitter:title" content="Spark rdd算子调优"/>
+<meta name="twitter:description" content="rdd 算子调优方法"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Java基础-重写与重载</h1>
+      <h1 class="post-title">Spark rdd算子调优</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-11-05 </span>
         <div class="post-category">
-            <a href="/categories/java/"> Java </a>
+            <a href="/categories/spark/"> Spark </a>
             </div>
-          <span class="more-meta"> 753 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1046 words </span>
+          <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
@@ -142,13 +142,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#前言">前言</a>
+<li><a href="#前言"><strong>前言</strong></a>
 <ul>
-<li><a href="#重写-override">重写(override)</a></li>
-<li><a href="#方法的重写规则">方法的重写规则</a></li>
-<li><a href="#重载-overloading">重载(overloading)</a></li>
-<li><a href="#重载的规则">重载的规则</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#几个调优建议"><strong>几个调优建议</strong></a></li>
+<li><a href="#发生数据倾斜调优"><strong>发生数据倾斜调优</strong></a>
+<ul>
+<li><a href="#数据倾斜原理"><strong>数据倾斜原理</strong></a></li>
+<li><a href="#调优方案"><strong>调优方案</strong></a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -159,56 +160,47 @@
     <div class="post-content">
       
 
-<h3 id="前言">前言</h3>
+<h3 id="前言"><strong>前言</strong></h3>
 
-<p>重载（Overloading）和重写（Overriding）是Java中两个比较重要的概念，但是又常常容易混淆</p>
+<p>在跑spark任务的时候，发现随着用户量的一个陡增，任务执行的时间突然长了起来，是时候该优化一下性能了~</p>
 
-<h4 id="重写-override">重写(override)</h4>
+<h4 id="几个调优建议"><strong>几个调优建议</strong></h4>
+
+<ol>
+<li>对于同一份数据，只应该创建一个RDD，不能创建多个RDD来代表同一份数据</li>
+<li>应该尽量复用一个RDD，这样可以尽可能地减少RDD的数量，从而尽可能减少算子执行的次数。</li>
+<li>对多次使用的RDD进行持久化
+  使用cache()方法 或  persist()方法</li>
+<li>能避免则尽可能避免使用reduceByKey、join、distinct、repartition等会进行 shuffle的算子，尽量使用map类的非shuffle算子</li>
+<li>尽量使用可以map-side预聚合的算子。</li>
+<li>使用高性能算子，如：
 
 <ul>
-<li>允许访问：即非private方法;</li>
-<li>重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。即外壳不变，核心重写！</li>
+<li>使用reduceByKey/aggregateByKey替代groupByKey</li>
+<li>使用mapPartitions替代普通map</li>
+<li>使用foreachPartitions替代foreach</li>
+<li>使用filter之后进行coalesce操作</li>
+<li>使用repartitionAndSortWithinPartitions替代repartition与sort类操作</li>
+</ul></li>
+</ol>
+
+<h4 id="发生数据倾斜调优"><strong>发生数据倾斜调优</strong></h4>
+
+<h5 id="数据倾斜原理"><strong>数据倾斜原理</strong></h5>
+
+<ul>
+<li>在进行shuffle的时候，必须将各个节点上相同的key拉取到某个节点上的一个task来进行处理，比如按照key进行 聚合或join等操作。此时如果某个key对应的数据量特别大的话，就会发生数据倾斜</li>
+<li>比如大部分key对应10条数据，但是个别key却对应了100万 条数据，那么大部分task可能就只会分配到10条数据，然后1秒钟就运行完了；但是个别task可能分配到了100万数据，要运行一两个小时。因此，整 个Spark作业的运行进度是由运行时间最长的那个task决定的。</li>
 </ul>
 
-<h4 id="方法的重写规则">方法的重写规则</h4>
+<h5 id="调优方案"><strong>调优方案</strong></h5>
 
 <ul>
-<li>参数列表必须相同;</li>
-<li>返回类型与被重写方法的返回类型可以不相同，但是必须是父类返回值的派生类;</li>
-<li>访问权限不能比父类中被重写的方法的访问权限更低;</li>
-<li>父类的成员方法只能被它的子类重写;</li>
-<li>声明为final的方法不能被重写;</li>
-<li>声明为static的方法不能被重写，但是能够被再次声明;</li>
-<li>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法;</li>
-<li>子类和父类不在同一个包中，那么子类只能够重写父类的声明为public和protected的非final方法;</li>
-<li>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以;</li>
-<li>构造方法不能被重写;</li>
-<li>如果不能继承一个方法，则不能重写这个方法;</li>
-</ul>
-
-<h4 id="重载-overloading">重载(overloading)</h4>
-
-<ul>
-<li>是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同；</li>
-<li>每个重载的方法（或者构造函数）都必须有一个独一无二的参数类型列表;</li>
-<li>最常用的地方就是构造器的重载;</li>
-</ul>
-
-<h4 id="重载的规则">重载的规则</h4>
-
-<ul>
-<li>被重载的方法必须改变参数列表(参数个数或类型不一样)；</li>
-<li>被重载的方法可以改变返回类型；</li>
-<li>被重载的方法可以改变访问修饰符；</li>
-<li>被重载的方法可以声明新的或更广的检查异常；</li>
-<li>方法能够在同一个类中或者在一个子类中被重载;</li>
-<li>无法以返回值类型作为重载函数的区分标准;</li>
-</ul>
-
-<h4 id="总结">总结</h4>
-
-<ul>
-<li>说到底,方法重载是一个类的多态性表现,而方法重写是子类与父类的一种多态性表现。</li>
+<li>通过Hive来进行数据预处理， 把数据倾斜的发生提前到了Hive ETL中，避免Spark程序发生数据倾斜；</li>
+<li>如果导致倾斜的key就少数几个，则可以考虑过滤这几个key；</li>
+<li>提高shuffle操作的并行度， 在对RDD执行shuffle算子时，给shuffle算子传入一个参数，比如 reduceByKey(1000)，该参数就设置了这个shuffle算子执行时shuffle read task的数量；</li>
+<li>两阶段聚合（即局部聚合+全局聚合），性能提升较大
+    - 原理：将原本相同的key通过附加随机前缀的方式，变成多个不同的key，就可以让原本被一个task处理的数据分散到多个task上去做局部聚合，进而解决单个task处理数据量过多的问题。接着去除掉随机前缀，再次进行全局聚合，就可以得到最终的结果。</li>
 </ul>
 
     </div>
@@ -230,16 +222,17 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/java/">Java</a>
+          <a href="/tags/spark/">Spark</a>
+          <a href="/tags/rdd/">rdd</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-11-07/">
+        <a class="prev" href="/post/2019-11/http_delay/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Spark rdd算子调优</span>
+            <span class="prev-text nav-default">windows和linux环境下网络延迟模拟</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/2019-11-05/">
-            <span class="next-text nav-default">JVM GC算法初探</span>
+        <a class="next" href="/post/2019-11/override_overload/">
+            <span class="next-text nav-default">Java基础-重写与重载</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -252,10 +245,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-05 17:03:20 \x2b0800 CST',
-        title: 'Java基础-重写与重载',
+        id: '2019-11-05 17:44:57 \x2b0800 CST',
+        title: 'Spark rdd算子调优',
         link: decodeURI(location.href),
-        desc: '重写与重载，傻傻分不清',
+        desc: 'rdd 算子调优方法',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Spark rdd算子调优 - Sakura&#39;s space</title>
+  <title>Hugo博客进阶(一) - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="rdd 算子调优方法" /><meta name="keywords" content="Spark, rdd" />
+<meta name="author" content="sakura" /><meta name="description" content="Github Pages配置个人域名，DNS解析配置" /><meta name="keywords" content="Hugo, DOMAIN, DNS" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-07/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11/blog_advance01/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Spark rdd算子调优" />
-<meta property="og:description" content="rdd 算子调优方法" />
+<meta property="og:title" content="Hugo博客进阶(一)" />
+<meta property="og:description" content="Github Pages配置个人域名，DNS解析配置" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-07/" />
-<meta property="article:published_time" content="2019-11-05T17:44:57+08:00" />
-<meta property="article:modified_time" content="2019-11-05T17:44:57+08:00" />
-<meta itemprop="name" content="Spark rdd算子调优">
-<meta itemprop="description" content="rdd 算子调优方法">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11/blog_advance01/" />
+<meta property="article:published_time" content="2019-11-04T16:24:14+08:00" />
+<meta property="article:modified_time" content="2019-11-04T16:24:14+08:00" />
+<meta itemprop="name" content="Hugo博客进阶(一)">
+<meta itemprop="description" content="Github Pages配置个人域名，DNS解析配置">
 
 
-<meta itemprop="datePublished" content="2019-11-05T17:44:57&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T17:44:57&#43;08:00" />
-<meta itemprop="wordCount" content="1046">
+<meta itemprop="datePublished" content="2019-11-04T16:24:14&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-04T16:24:14&#43;08:00" />
+<meta itemprop="wordCount" content="630">
 
 
 
-<meta itemprop="keywords" content="Spark,rdd," />
+<meta itemprop="keywords" content="Hugo,Github Pages,DOMAIN,DNS," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Spark rdd算子调优"/>
-<meta name="twitter:description" content="rdd 算子调优方法"/>
+<meta name="twitter:title" content="Hugo博客进阶(一)"/>
+<meta name="twitter:description" content="Github Pages配置个人域名，DNS解析配置"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Spark rdd算子调优</h1>
+      <h1 class="post-title">Hugo博客进阶(一)</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-11-05 </span>
+        <span class="post-time"> 2019-11-04 </span>
         <div class="post-category">
-            <a href="/categories/spark/"> Spark </a>
+            <a href="/categories/blog/"> Blog </a>
             </div>
-          <span class="more-meta"> 1046 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 630 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -142,14 +142,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#前言"><strong>前言</strong></a>
+<li><a href="#前言">前言</a>
 <ul>
-<li><a href="#几个调优建议"><strong>几个调优建议</strong></a></li>
-<li><a href="#发生数据倾斜调优"><strong>发生数据倾斜调优</strong></a>
-<ul>
-<li><a href="#数据倾斜原理"><strong>数据倾斜原理</strong></a></li>
-<li><a href="#调优方案"><strong>调优方案</strong></a></li>
-</ul></li>
+<li><a href="#1-前提">1.前提</a></li>
+<li><a href="#2-购买域名">2.购买域名</a></li>
+<li><a href="#3-配置个人域名到githubpages">3.配置个人域名到githubPages</a></li>
+<li><a href="#4-添加dns解析">4.添加DNS解析</a></li>
+<li><a href="#5-打开个人域名">5.打开个人域名</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -160,47 +159,63 @@
     <div class="post-content">
       
 
-<h3 id="前言"><strong>前言</strong></h3>
+<h3 id="前言">前言</h3>
 
-<p>在跑spark任务的时候，发现随着用户量的一个陡增，任务执行的时间突然长了起来，是时候该优化一下性能了~</p>
+<p>本文介绍了如何将自己的静态网站托管到github后，在阿里云上购买个人域名并利用免费的DNS服务在github Pages上以https协议加载个人域名。</p>
 
-<h4 id="几个调优建议"><strong>几个调优建议</strong></h4>
-
-<ol>
-<li>对于同一份数据，只应该创建一个RDD，不能创建多个RDD来代表同一份数据</li>
-<li>应该尽量复用一个RDD，这样可以尽可能地减少RDD的数量，从而尽可能减少算子执行的次数。</li>
-<li>对多次使用的RDD进行持久化
-  使用cache()方法 或  persist()方法</li>
-<li>能避免则尽可能避免使用reduceByKey、join、distinct、repartition等会进行 shuffle的算子，尽量使用map类的非shuffle算子</li>
-<li>尽量使用可以map-side预聚合的算子。</li>
-<li>使用高性能算子，如：
+<h4 id="1-前提">1.前提</h4>
 
 <ul>
-<li>使用reduceByKey/aggregateByKey替代groupByKey</li>
-<li>使用mapPartitions替代普通map</li>
-<li>使用foreachPartitions替代foreach</li>
-<li>使用filter之后进行coalesce操作</li>
-<li>使用repartitionAndSortWithinPartitions替代repartition与sort类操作</li>
-</ul></li>
-</ol>
-
-<h4 id="发生数据倾斜调优"><strong>发生数据倾斜调优</strong></h4>
-
-<h5 id="数据倾斜原理"><strong>数据倾斜原理</strong></h5>
-
-<ul>
-<li>在进行shuffle的时候，必须将各个节点上相同的key拉取到某个节点上的一个task来进行处理，比如按照key进行 聚合或join等操作。此时如果某个key对应的数据量特别大的话，就会发生数据倾斜</li>
-<li>比如大部分key对应10条数据，但是个别key却对应了100万 条数据，那么大部分task可能就只会分配到10条数据，然后1秒钟就运行完了；但是个别task可能分配到了100万数据，要运行一两个小时。因此，整 个Spark作业的运行进度是由运行时间最长的那个task决定的。</li>
+<li>保证访问<a href="https://username.github.io">https://username.github.io</a> 能够正确访问你的网站</li>
+<li>如果你还没有试过使用Hugo+github Pages搭建博客，欢迎查看我的上一篇教程<a href="https://luowenbin.site/post/2019-11-03-1/">https://luowenbin.site/post/2019-11-03-1/</a></li>
 </ul>
 
-<h5 id="调优方案"><strong>调优方案</strong></h5>
+<h4 id="2-购买域名">2.购买域名</h4>
 
 <ul>
-<li>通过Hive来进行数据预处理， 把数据倾斜的发生提前到了Hive ETL中，避免Spark程序发生数据倾斜；</li>
-<li>如果导致倾斜的key就少数几个，则可以考虑过滤这几个key；</li>
-<li>提高shuffle操作的并行度， 在对RDD执行shuffle算子时，给shuffle算子传入一个参数，比如 reduceByKey(1000)，该参数就设置了这个shuffle算子执行时shuffle read task的数量；</li>
-<li>两阶段聚合（即局部聚合+全局聚合），性能提升较大
-    - 原理：将原本相同的key通过附加随机前缀的方式，变成多个不同的key，就可以让原本被一个task处理的数据分散到多个task上去做局部聚合，进而解决单个task处理数据量过多的问题。接着去除掉随机前缀，再次进行全局聚合，就可以得到最终的结果。</li>
+<li>前往<a href="https://account.aliyun.com/">https://account.aliyun.com/</a> 挑选域名，推荐暂时购买1年，后续网站稳定了再购买5年或者10年</li>
+<li>域名最好买可以备案的域名，后续可以省很多事</li>
+<li>购买域名前需要验证邮箱，实名认证，阿里十分迅速，大约5分钟可以搞掂</li>
+</ul>
+
+<h4 id="3-配置个人域名到githubpages">3.配置个人域名到githubPages</h4>
+
+<ul>
+<li><p>添加CNAME文件到/static目录，以后构建时就会自动生成一份到/docs，文件内容即为domain</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">username.site</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>构建hugo并提交</p></li>
+
+<li><p>到settting页面检查是否自动加载了domain
+<img src="https://i.loli.net/2019/11/05/j6bNMmzq5Rsa2LK.png" alt="image.png" /></p></li>
+
+<li><p>如果失败，检查一下/docs目录下是否有CNAME文件</p></li>
+</ul>
+
+<h4 id="4-添加dns解析">4.添加DNS解析</h4>
+
+<ul>
+<li>重复ping一下你的username.github.io，得到2个以上ip</li>
+<li>到域名控制台进入解析设置，添加3个记录
+<img src="https://i.loli.net/2019/11/05/luByswWTp1L2afo.png" alt="image.png" /></li>
+<li>1-2分钟后查看githubPages配置，已经被解析成功
+<img src="https://i.loli.net/2019/11/05/TGBHhUOplPv7mW6.png" alt="image.png" /></li>
+<li>开启https
+<img src="https://i.loli.net/2019/11/05/enWzcgyE9x18aOR.png" alt="image.png" /></li>
+<li>如果提示失败，请检查下域名是否正常状态；添加的记录ip是否正确</li>
+</ul>
+
+<h4 id="5-打开个人域名">5.打开个人域名</h4>
+
+<ul>
+<li>点击<a href="https://luowenbin.site/">https://luowenbin.site/</a> 访问成功</li>
 </ul>
 
     </div>
@@ -213,7 +228,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-05
+        2019-11-04
         
     </span>
   </p>
@@ -222,13 +237,19 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/spark/">Spark</a>
-          <a href="/tags/rdd/">rdd</a>
+          <a href="/tags/hugo/">Hugo</a>
+          <a href="/tags/github-pages/">Github Pages</a>
+          <a href="/tags/domain/">DOMAIN</a>
+          <a href="/tags/dns/">DNS</a>
           </div>
       <nav class="post-nav">
-        
-        <a class="next" href="/post/2019-11-06/">
-            <span class="next-text nav-default">Java基础-重写与重载</span>
+        <a class="prev" href="/post/2019-11/blog_advance02/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Hugo博客进阶(二)</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019-11/blog_build/">
+            <span class="next-text nav-default">快速利用Hugo搭建个人博客</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -241,10 +262,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-05 17:44:57 \x2b0800 CST',
-        title: 'Spark rdd算子调优',
+        id: '2019-11-04 16:24:14 \x2b0800 CST',
+        title: 'Hugo博客进阶(一)',
         link: decodeURI(location.href),
-        desc: 'rdd 算子调优方法',
+        desc: 'Github Pages配置个人域名，DNS解析配置',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {

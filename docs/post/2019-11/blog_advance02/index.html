@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>JVM GC算法初探 - Sakura&#39;s space</title>
+  <title>Hugo博客进阶(二) - Sakura&#39;s space</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="sakura" /><meta name="description" content="jvm垃圾回收算法了解" /><meta name="keywords" content="JVM, GC, Java" />
+<meta name="author" content="sakura" /><meta name="description" content="利用gitment给博客添加评论功能" /><meta name="keywords" content="Hugo, DOMAIN, DNS" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="https://luowenbin.site/post/2019-11-05/" />
+<link rel="canonical" href="https://luowenbin.site/post/2019-11/blog_advance02/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="JVM GC算法初探" />
-<meta property="og:description" content="jvm垃圾回收算法了解" />
+<meta property="og:title" content="Hugo博客进阶(二)" />
+<meta property="og:description" content="利用gitment给博客添加评论功能" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luowenbin.site/post/2019-11-05/" />
-<meta property="article:published_time" content="2019-11-05T16:03:20+08:00" />
-<meta property="article:modified_time" content="2019-11-05T16:03:20+08:00" />
-<meta itemprop="name" content="JVM GC算法初探">
-<meta itemprop="description" content="jvm垃圾回收算法了解">
+<meta property="og:url" content="https://luowenbin.site/post/2019-11/blog_advance02/" />
+<meta property="article:published_time" content="2019-11-04T20:03:20+08:00" />
+<meta property="article:modified_time" content="2019-11-04T20:03:20+08:00" />
+<meta itemprop="name" content="Hugo博客进阶(二)">
+<meta itemprop="description" content="利用gitment给博客添加评论功能">
 
 
-<meta itemprop="datePublished" content="2019-11-05T16:03:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-05T16:03:20&#43;08:00" />
-<meta itemprop="wordCount" content="876">
+<meta itemprop="datePublished" content="2019-11-04T20:03:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-04T20:03:20&#43;08:00" />
+<meta itemprop="wordCount" content="330">
 
 
 
-<meta itemprop="keywords" content="Java,GC,Heap,JVM," />
+<meta itemprop="keywords" content="Hugo,Github Pages,gitment," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JVM GC算法初探"/>
-<meta name="twitter:description" content="jvm垃圾回收算法了解"/>
+<meta name="twitter:title" content="Hugo博客进阶(二)"/>
+<meta name="twitter:description" content="利用gitment给博客添加评论功能"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -120,15 +120,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">JVM GC算法初探</h1>
+      <h1 class="post-title">Hugo博客进阶(二)</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-11-05 </span>
+        <span class="post-time"> 2019-11-04 </span>
         <div class="post-category">
-            <a href="/categories/java/"> Java </a>
+            <a href="/categories/blog/"> Blog </a>
             </div>
-          <span class="more-meta"> 876 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 330 words </span>
+          <span class="more-meta"> 1 min read </span>
         
       </div>
     </header>
@@ -142,10 +142,11 @@
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#前言">前言</a>
 <ul>
-<li><a href="#年轻代-老年代-永久代-metaspace-存放什么对象">年轻代，老年代，永久代（Metaspace ）存放什么对象？</a></li>
-<li><a href="#cms和g1收集器-算法-的区别">CMS和G1收集器(算法)的区别？</a></li>
+<li><a href="#1-申请gitment的oauth">1.申请gitment的Oauth</a></li>
+<li><a href="#2-填写config-toml">2.填写config.toml</a></li>
+<li><a href="#3-初始化gitment">3.初始化gitment</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -156,28 +157,23 @@
     <div class="post-content">
       
 
-<h4 id="年轻代-老年代-永久代-metaspace-存放什么对象">年轻代，老年代，永久代（Metaspace ）存放什么对象？</h4>
+<h3 id="前言">前言</h3>
+
+<p>Gitment 基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
+
+<h4 id="1-申请gitment的oauth">1.申请gitment的Oauth</h4>
 
 <ul>
-<li>heap包含年轻代和老年代，永久代是另一块内存；</li>
-<li>年轻代用来存放新近创建的对象，对象更新速度快，在短时间内产生大量的“死亡对象”</li>
-<li>老年代是从年轻代Survivor 区域中熬过来的对象或者大对象，fullgc时清理；</li>
-<li>永久代存放class信息、常量、静态变量等数据，fullgc时清理；</li>
+<li>点击<a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> 注册新的oauth id</li>
+<li>Homepage URL 和 Authorization callback URL 填写网站home就好</li>
+<li>注册完后会得到一个clientId和clientSecret
+<img src="https://i.loli.net/2019/11/05/WIpuv2mrVRwKZXl.png" alt="image.png" /></li>
 </ul>
 
-<h4 id="cms和g1收集器-算法-的区别">CMS和G1收集器(算法)的区别？</h4>
+<h4 id="2-填写config-toml">2.填写config.toml</h4>
 
 <ul>
-<li><p>CMS（Concurrent Mark and Sweep）是以牺牲吞吐量为代价来获得最短停顿时间的垃圾回收器，主要适用于对响应时间的侧重性大于吞吐量的场景。仅针对老年代（Tenured Generation）的回收。</p>
-
-<ol>
-<li><p>为求达到该目标主要是因为以下两个原因：</p>
-
-<p>i.  没有采取compact操作，而是简单的mark and sweep，同时维护了一个free list来管理内存空间，所以也产生了大量的内存碎片。</p>
-
-<p>ii. mark and sweep分为多个阶段，其中大部分的阶段的GC线程是和用户线程并发执行，默认的GC线程数为物理CPU核心数的1/4。</p></li>
-
-<li><p>gc参数</p>
+<li><p>如果你用的是even主题，直接将信息填写进去就好了</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -186,49 +182,24 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">-XX:+UseConcMarkSweepGC - 启用CMS，同时-XX:+UseParNewGC会被自动打开
--XX:CMSInitiatingOccupancyFraction - 设置第一次启动CMS的阈值，默认是68%
--XX:+UseCMSInitiatingOccupancyOnly - 只是用设定的回收阈值，如果不指定，JVM仅在第一次使用设定值，后续则自动调整
--XX:+CMSPermGenSweepingEnabled - 回收perm区
--XX:+CMSConcurrentMTEnabled 默认为true。
--XX:+UseCMSCompactAtFullCollection 默认为true。
--XX:+CMSFullGCsBeforeCompaction 默认是0
--XX:+CMSParallelRemarkEnabled 默认为ture
--XX:+CMSScavengeBeforeRemark 强制remark之前开始一次minor GC默认为false</pre></td></tr></table>
+<pre class="chroma">[params]
+[params.gitment]          
+    owner = &#34;iluowenbin&#34;              
+    repo = &#34;hugo-site&#34;               
+    clientId = &#34;xxxxx&#34;           
+    clientSecret = &#34;xxxxx&#34;</pre></td></tr></table>
 </div>
 </div></li>
-</ol></li>
+</ul>
 
-<li><p>G1收集器（或者垃圾优先收集器）的设计初衷是为了尽量缩短处理超大堆时产生的停顿。在回收的时候将对象从一个小堆区复制到另一个小堆区，这意味着G1在回收垃圾的时候同时完成了堆的部分内存压缩，相对于CMS的优势而言就是内存碎片的产生率大大降低。</p>
+<h4 id="3-初始化gitment">3.初始化gitment</h4>
 
-<ol>
-<li><p>gc参数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">-XX:+UseG1GC 启用G1垃圾收集器
--XX:MaxGCPauseMillis=n 指定期望的最大停顿时间
--XX:G1HeapRegionSize=n 设置的 G1 区域的大小，值是 2 的幂
--XX:ParallelGCThreads=n 设置 STW 工作线程数的值。将 n 的值设置为逻辑处理器的数量
--XX:ConcGCThreads=n 设置并行标记的线程数。将 n 设置为并行垃圾回收线程数 
--XX:InitiatingHeapOccupancyPercent=45 设置触发标记周期的 Java 堆占用率阈值。默认占用率是整个 Java 堆的 45%
--XX:G1ReservePercent=n 设置堆内存保留为假天花板的总量</pre></td></tr></table>
-</div>
-</div></li>
-</ol></li>
+<ul>
+<li>未初始化之前会有init提醒</li>
+<li>登录github并init评论，之后其他用户就可以评论你的博客啦
+<img src="https://i.loli.net/2019/11/05/opWvcHOBEaVz9GS.png" alt="image.png" /></li>
 </ul>
 
     </div>
@@ -241,7 +212,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-05
+        2019-11-04
         
     </span>
   </p>
@@ -250,19 +221,18 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/java/">Java</a>
-          <a href="/tags/gc/">GC</a>
-          <a href="/tags/heap/">Heap</a>
-          <a href="/tags/jvm/">JVM</a>
+          <a href="/tags/hugo/">Hugo</a>
+          <a href="/tags/github-pages/">Github Pages</a>
+          <a href="/tags/gitment/">gitment</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-11-06/">
+        <a class="prev" href="/post/2019-11/jvm_gc/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Java基础-重写与重载</span>
+            <span class="prev-text nav-default">JVM GC原因了解</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/2019-11-04/">
-            <span class="next-text nav-default">JVM GC原因了解</span>
+        <a class="next" href="/post/2019-11/blog_advance01/">
+            <span class="next-text nav-default">Hugo博客进阶(一)</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -275,10 +245,10 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2019-11-05 16:03:20 \x2b0800 CST',
-        title: 'JVM GC算法初探',
+        id: '2019-11-04 20:03:20 \x2b0800 CST',
+        title: 'Hugo博客进阶(二)',
         link: decodeURI(location.href),
-        desc: 'jvm垃圾回收算法了解',
+        desc: '利用gitment给博客添加评论功能',
         owner: 'iluowenbin',
         repo: 'hugo-site',
         oauth: {

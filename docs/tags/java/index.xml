@@ -13,28 +13,28 @@
     
     <item>
       <title>Java基础-重写与重载</title>
-      <link>https://luowenbin.site/post/2019-11-06/</link>
+      <link>https://luowenbin.site/post/2019-11/override_overload/</link>
       <pubDate>Tue, 05 Nov 2019 17:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-06/</guid>
+      <guid>https://luowenbin.site/post/2019-11/override_overload/</guid>
       <description>重写与重载，傻傻分不清</description>
     </item>
     
     <item>
       <title>JVM GC算法初探</title>
-      <link>https://luowenbin.site/post/2019-11-05/</link>
+      <link>https://luowenbin.site/post/2019-11/jvm_gc_collectors/</link>
       <pubDate>Tue, 05 Nov 2019 16:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-05/</guid>
+      <guid>https://luowenbin.site/post/2019-11/jvm_gc_collectors/</guid>
       <description>jvm垃圾回收算法了解</description>
     </item>
     
     <item>
       <title>JVM GC原因了解</title>
-      <link>https://luowenbin.site/post/2019-11-04/</link>
+      <link>https://luowenbin.site/post/2019-11/jvm_gc/</link>
       <pubDate>Tue, 05 Nov 2019 11:03:20 +0800</pubDate>
       
-      <guid>https://luowenbin.site/post/2019-11-04/</guid>
+      <guid>https://luowenbin.site/post/2019-11/jvm_gc/</guid>
       <description>jvm垃圾回收了解</description>
     </item>
     

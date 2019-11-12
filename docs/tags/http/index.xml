@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http on Sakura&#39;s space</title>
+    <link>https://luowenbin.site/tags/http/</link>
+    <description>Recent content in http on Sakura&#39;s space</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 12 Nov 2019 11:05:37 +0800</lastBuildDate>
+    
+	<atom:link href="https://luowenbin.site/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>windows和linux环境下网络延迟模拟</title>
+      <link>https://luowenbin.site/post/2019-11/http_delay/</link>
+      <pubDate>Tue, 12 Nov 2019 11:05:37 +0800</pubDate>
+      
+      <guid>https://luowenbin.site/post/2019-11/http_delay/</guid>
+      <description>利用tc和clumsy模拟网络延迟</description>
+    </item>
+    
+  </channel>
+</rss>
